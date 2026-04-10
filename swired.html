@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SWiRED · Brand Identity — Paola Arzuffi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --dark:       #5c1020;
+      --medium:     #7b1831;
+      --light:      #f7c9d1;
+      --lightest:   #fde8ec;
+      --ink:        #1C1C1C;
+      --mid:        #5A5A5A;
+      --border:     #edd5da;
+      --white:      #FFFFFF;
+      --section-bg: #FDFAF9;
+      --accent:     #C1526A;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--white);
+      color: var(--ink);
+      line-height: 1.7;
+    }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--dark);
+      padding: 14px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .topbar a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--light);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+
+    .topbar a:hover { color: var(--white); }
+
+    .topbar .section-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      color: rgba(247,201,209,0.6);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ── HERO: packaging image ── */
+    .hero-visual {
+      width: 100%;
+      background: #e6e6e6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      line-height: 0;
+    }
+
+    .hero-visual img {
+      width: 50%;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* ── HERO TEXT ── */
+    .hero {
+      background: var(--dark);
+      padding: 36px 40px 32px;
+    }
+
+    .hero-inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .hero-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .hero h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 10px;
+      letter-spacing: -0.2px;
+    }
+
+    .hero-sub {
+      font-size: 0.95rem;
+      color: var(--light);
+      max-width: 640px;
+      opacity: 0.85;
+    }
+
+    /* ── SECTIONS ── */
+    .case-section {
+      padding: 56px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .case-section:last-of-type { border-bottom: none; }
+
+    .case-section.alt { background: var(--section-bg); }
+
+    .content-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--medium);
+      margin-bottom: 10px;
+      font-weight: 700;
+      display: block;
+    }
+
+    h2 {
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .body-text p {
+      font-size: 1rem;
+      color: var(--mid);
+      line-height: 1.8;
+      margin-bottom: 1em;
+    }
+
+    .body-text p:last-child { margin-bottom: 0; }
+
+    /* ── MEDIA BLOCK ── */
+    .media-block {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 40px;
+    }
+
+    .media-block img {
+      width: 100%;
+      border-radius: 4px;
+      display: block;
+      cursor: zoom-in;
+    }
+
+    /* ── TWO-UP GRID ── */
+    .two-up {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .two-up img {
+      width: 100%;
+      border-radius: 4px;
+      display: block;
+      cursor: zoom-in;
+    }
+
+    /* ── THREE-UP GRID ── */
+    .three-up {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .three-up img {
+      width: 100%;
+      border-radius: 4px;
+      display: block;
+      cursor: zoom-in;
+    }
+
+    /* ── DESIGN DECISIONS ── */
+    .decision-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 24px;
+    }
+
+    .decision-list li {
+      padding: 16px 0;
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 24px;
+      align-items: baseline;
+    }
+
+    .decision-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+      padding-top: 2px;
+    }
+
+    .decision-text {
+      font-size: 0.95rem;
+      color: var(--mid);
+      line-height: 1.7;
+    }
+
+    /* ── TOOLS ── */
+    .tools-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .tool-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: var(--lightest);
+      color: var(--medium);
+      border-radius: 4px;
+      padding: 6px 12px;
+    }
+
+    /* ── LIGHTBOX ── */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #lightbox.open { display: flex; }
+
+    #lightbox-panel {
+      background: var(--white);
+      border-radius: 6px;
+      padding: 12px;
+      max-width: 80vw;
+      max-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      cursor: zoom-out;
+    }
+
+    #lightbox-img {
+      max-width: 100%;
+      max-height: 86vh;
+      display: block;
+      border-radius: 3px;
+    }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      background: var(--dark);
+      padding: 40px;
+      text-align: center;
+    }
+
+    .page-footer a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--light);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .page-footer a:hover { color: var(--white); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 720px) {
+      .two-up, .three-up { grid-template-columns: 1fr; }
+      .decision-list li { grid-template-columns: 1fr; gap: 6px; }
+      .hero h1 { font-size: 1.4rem; }
+      .topbar, .hero, .case-section { padding-left: 20px; padding-right: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── TOP BAR ── -->
+  <div class="topbar">
+    <a href="portfolio-mockup.html#graphic-design">← Home</a>
+    <span class="section-tag">Graphic Design</span>
+  </div>
+
+  <!-- ── HERO: packaging mockup ── -->
+  <div class="hero-visual">
+    <img src="3.Portfolio/4.GD/swired_A02_p11.jpg" alt="SWiRED chocolate packaging mockup" />
+  </div>
+
+  <!-- ── HERO TEXT ── -->
+  <div class="hero">
+    <div class="hero-inner">
+      <span class="hero-label">ES Design</span>
+      <h1>SWiRED · Brand Identity</h1>
+      <p class="hero-sub">A complete brand identity for a chocolate brand designed for neurodivergent adults, from research and strategy to identity system and packaging.</p>
+    </div>
+  </div>
+
+  <!-- ── CONCEPT ── -->
+  <section class="case-section">
+    <div class="content-wrap">
+      <span class="section-label">Concept</span>
+      <h2>A brand for an audience that didn't exist yet in this space</h2>
+      <div class="body-text">
+        <p>No chocolate brand existed for neurodivergent adults. Products in this space either employed neurodivergent people or were aimed at children. The gap was clear: an adult neurodivergent audience with no brand that understood their daily experience of overstimulation, visual noise, and sensory overload.</p>
+        <p>SWiRED is built around one insight: neurodivergent people are wired differently, and that is something to celebrate, not fix. The name takes the English word "wired" and adds an "s" to evoke that difference. Playful, direct, without paternalism.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── RESEARCH ── -->
+  <section class="case-section alt">
+    <div class="content-wrap">
+      <span class="section-label">Research</span>
+      <h2>A gap confirmed by benchmarking, a target defined by empathy</h2>
+      <div class="body-text">
+        <p>The benchmark confirmed the gap: no chocolate brand was targeting neurodivergent adults specifically. Existing chocolate brands with calm aesthetics shared four characteristics, clean legible typography, simple or no isologo, unsaturated flat colours, and maximum negative space. These became the design constraints.</p>
+        <p>The target was defined through a detailed empathy map: adults 30–45 diagnosed with ADHD, autism, dyspraxia or dyslexia. Employed, culturally engaged, interested in mental health and self-knowledge. They choose brands with calm quiet aesthetics. They reject patronising tones. They are not looking for a product that treats their neurodivergence as a problem to solve.</p>
+      </div>
+      <div class="two-up" style="margin-top:32px;">
+        <img src="3.Portfolio/4.GD/swired_A02_p04.jpg" alt="SWiRED — Target and empathy map" />
+        <img src="3.Portfolio/4.GD/swired_A02_p06.jpg" alt="SWiRED — Customer journey map" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ── DESIGN DECISIONS ── -->
+  <section class="case-section">
+    <div class="content-wrap">
+      <span class="section-label">Design Decisions</span>
+      <h2>Every element answers to the audience</h2>
+      <ul class="decision-list">
+        <li>
+          <span class="decision-label">Naming</span>
+          <span class="decision-text">SWiRED, from "wired" + an "s" to signal difference. A neologism that is evocative, humorous, and non-clinical to indicate that neurodivergent people are wired differently.</span>
+        </li>
+        <li>
+          <span class="decision-label">Logo</span>
+          <span class="decision-text">Gill Sans, chosen for legibility and reduced visual noise. All caps for clarity, lowercase "i" to signal difference, the W replaced by the brand symbol.</span>
+        </li>
+        <li>
+          <span class="decision-label">Symbol</span>
+          <span class="decision-text">An EEG trace formed by three parallel cables — a direct and playful reference to being wired differently.</span>
+        </li>
+        <li>
+          <span class="decision-label">Colour</span>
+          <span class="decision-text">Two tones from the same family, deep burgundy and soft pink. Flat, calm, unsaturated. No competitor uses this palette.</span>
+        </li>
+        <li>
+          <span class="decision-label">Packaging</span>
+          <span class="decision-text">Rough-textured paper for tactile experience. Embossed elements for self-regulation. Clean composition with maximum negative space. No decorative elements. Designed to stand out through restraint, not noise.</span>
+        </li>
+        <li>
+          <span class="decision-label">Communication</span>
+          <span class="decision-text">Direct and honest. Channels where neurodivergent communities are active, Instagram, YouTube, cinema advertising.</span>
+        </li>
+      </ul>
+      <div class="tools-row">
+        <span class="tool-tag">Adobe InDesign</span>
+        <span class="tool-tag">Adobe Illustrator</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── IDENTITY OVERVIEW ── -->
+  <section class="case-section alt">
+    <div class="content-wrap">
+      <div class="media-block" style="margin-top:0;">
+        <img src="3.Portfolio/4.GD/swired_A02_p10.jpg" alt="SWiRED — Identity system overview" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BRAND MANUAL PAGES ── -->
+  <section class="case-section">
+    <div class="content-wrap">
+      <div class="three-up" style="margin-top:0;">
+        <img src="3.Portfolio/4.GD/swired_A04_p21.jpg" alt="SWiRED — Colores primarios" />
+        <img src="3.Portfolio/4.GD/swired_A04_p24.jpg" alt="SWiRED — Tipografía" />
+        <img src="3.Portfolio/4.GD/swired_A04_p29.jpg" alt="SWiRED — Sistema gráfico" />
+      </div>
+      <div class="three-up" style="margin-top:12px;">
+        <img src="3.Portfolio/4.GD/swired_A04_p12.jpg" alt="SWiRED — Área de protección" />
+        <img src="3.Portfolio/4.GD/swired_A04_p37.jpg" alt="SWiRED — Bolsa corporativa" />
+        <img src="3.Portfolio/4.GD/swired_A04_p07.jpg" alt="SWiRED — Logotipo" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <div class="page-footer">
+    <a href="portfolio-mockup.html#graphic-design">← Home</a>
+  </div>
+
+  <!-- ── LIGHTBOX ── -->
+  <div id="lightbox">
+    <div id="lightbox-panel">
+      <img id="lightbox-img" src="" alt="" />
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.media-block img, .two-up img, .three-up img').forEach(function(img) {
+      img.addEventListener('click', function() {
+        document.getElementById('lightbox-img').src = this.src;
+        document.getElementById('lightbox-img').alt = this.alt;
+        document.getElementById('lightbox').classList.add('open');
+      });
+    });
+
+    document.getElementById('lightbox').addEventListener('click', function() {
+      this.classList.remove('open');
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') document.getElementById('lightbox').classList.remove('open');
+    });
+  </script>
+
+</body>
+</html>

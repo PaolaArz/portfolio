@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lady Dada — Paola Arzuffi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --dark:       #5c1020;
+      --medium:     #7b1831;
+      --light:      #f7c9d1;
+      --lightest:   #fde8ec;
+      --ink:        #1C1C1C;
+      --mid:        #5A5A5A;
+      --border:     #edd5da;
+      --white:      #FFFFFF;
+      --section-bg: #FDFAF9;
+      --accent:     #C1526A;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--white);
+      color: var(--ink);
+      line-height: 1.7;
+    }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--dark);
+      padding: 14px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .topbar a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--light);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+
+    .topbar a:hover { color: var(--white); }
+
+    .topbar .section-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      color: rgba(247,201,209,0.6);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ── HERO: cover full-bleed ── */
+    .hero-visual {
+      width: 100%;
+      background: #0d0d0d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 0;
+    }
+
+    .hero-visual img {
+      width: 50%;
+      max-width: 560px;
+      display: block;
+    }
+
+    /* ── HERO TEXT ── */
+    .hero {
+      background: var(--dark);
+      padding: 36px 40px 32px;
+    }
+
+    .hero-inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .hero-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .hero h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 10px;
+      letter-spacing: -0.2px;
+    }
+
+    .hero-sub {
+      font-size: 0.95rem;
+      color: var(--light);
+      max-width: 640px;
+      opacity: 0.85;
+    }
+
+    /* ── SECTIONS ── */
+    .case-section {
+      padding: 56px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .case-section:last-of-type { border-bottom: none; }
+
+    .case-section.alt { background: var(--section-bg); }
+
+    .content-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--medium);
+      margin-bottom: 10px;
+      font-weight: 700;
+      display: block;
+    }
+
+    h2 {
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .body-text p {
+      font-size: 1rem;
+      color: var(--mid);
+      line-height: 1.8;
+      margin-bottom: 1em;
+    }
+
+    .body-text p:last-child { margin-bottom: 0; }
+
+    /* ── SPREADS section: full-width images ── */
+    .spreads-section {
+      padding: 0;
+      background: #0d0d0d;
+    }
+
+    .spread-img {
+      display: block;
+      width: 100%;
+      line-height: 0;
+      border-bottom: 1px solid #222;
+      cursor: zoom-in;
+    }
+
+    .spread-img img {
+      width: 100%;
+      display: block;
+    }
+
+    /* closing single page: centred on dark bg */
+    .single-wrap {
+      background: #0d0d0d;
+      display: flex;
+      justify-content: center;
+      padding: 0;
+      line-height: 0;
+    }
+
+    .single-wrap img {
+      width: 50%;
+      max-width: 560px;
+      display: block;
+      cursor: zoom-in;
+    }
+
+    /* ── DESIGN DECISIONS ── */
+    .decision-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 24px;
+    }
+
+    .decision-list li {
+      padding: 16px 0;
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 24px;
+      align-items: baseline;
+    }
+
+    .decision-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+      padding-top: 2px;
+    }
+
+    .decision-text {
+      font-size: 0.95rem;
+      color: var(--mid);
+      line-height: 1.7;
+    }
+
+    /* ── TOOLS ── */
+    .tools-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .tool-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: var(--lightest);
+      color: var(--medium);
+      border-radius: 4px;
+      padding: 6px 12px;
+    }
+
+    /* ── LIGHTBOX ── */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #lightbox.open { display: flex; }
+
+    #lightbox-panel {
+      background: var(--white);
+      border-radius: 4px;
+      padding: 8px;
+      max-width: 92vw;
+      max-height: 92vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      cursor: zoom-out;
+    }
+
+    #lightbox-img {
+      max-width: 100%;
+      max-height: 88vh;
+      display: block;
+      border-radius: 2px;
+    }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      background: var(--dark);
+      padding: 40px;
+      text-align: center;
+    }
+
+    .page-footer a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--light);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .page-footer a:hover { color: var(--white); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 720px) {
+      .decision-list li { grid-template-columns: 1fr; gap: 6px; }
+      .hero h1 { font-size: 1.4rem; }
+      .topbar, .hero, .case-section { padding-left: 20px; padding-right: 20px; }
+      .hero-visual img, .single-wrap img { width: 80%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── TOP BAR ── -->
+  <div class="topbar">
+    <a href="portfolio-mockup.html#graphic-design">← Home</a>
+    <span class="section-tag">Graphic Design</span>
+  </div>
+
+  <!-- ── HERO: cover ── -->
+  <div class="hero-visual">
+    <img src="3.Portfolio/4.GD/ld_p01.jpg" alt="Lady Dada — cover" />
+  </div>
+
+  <!-- ── HERO TEXT ── -->
+  <div class="hero">
+    <div class="hero-inner">
+      <span class="hero-label">ES Design</span>
+      <h1>Lady Dada</h1>
+      <p class="hero-sub">An editorial article about the women of the Dada movement, researched, written and designed to breathe the aesthetic of its subject.</p>
+    </div>
+  </div>
+
+  <!-- ── CONCEPT ── -->
+  <section class="case-section">
+    <div class="content-wrap">
+      <span class="section-label">Concept</span>
+      <h2>A movement that claimed to be revolutionary — did it recognise its women?</h2>
+      <div class="body-text">
+        <p>I chose the Dada movement because I believe breaking rules is the most powerful way to convey a message, and Dada did it better than almost anyone. But the more I researched, the more one question kept surfacing: did a movement that claimed to be revolutionary actually recognise the women within it?</p>
+        <p>The answer the article arrives at is no, and yes, and it's complicated. Women were there from the start, at the Cabaret Voltaire, in the circles, in the work. But they were footnotes. Collaborators. Partners of the famous men. The article gives them their own space: Hannah Höch, Emmy Hennings, Angelika Hoerle, artists who were doing the work, being sidelined, and occasionally fighting back.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FIRST SPREAD (pages 2–3) ── -->
+  <div class="spreads-section">
+    <div class="spread-img">
+      <img src="3.Portfolio/4.GD/ld_p02.jpg" alt="Lady Dada — spread 1" />
+    </div>
+  </div>
+
+  <!-- ── DESIGN DECISIONS ── -->
+  <section class="case-section alt">
+    <div class="content-wrap">
+      <span class="section-label">Design Decisions</span>
+      <h2>The layout breathes the atmosphere of its subject</h2>
+      <ul class="decision-list">
+        <li>
+          <span class="decision-label">Brief</span>
+          <span class="decision-text">The layout should "breathe the atmosphere" of the subject, not imitate it, but be coherent with it.</span>
+        </li>
+        <li>
+          <span class="decision-label">Typography</span>
+          <span class="decision-text">Mixed typefaces, varied scales, diagonal text, different type treatments per section, echoing Dada's typographic chaos without reproducing it directly.</span>
+        </li>
+        <li>
+          <span class="decision-label">Layout</span>
+          <span class="decision-text">Multi-column grids that break their own rules. Text that runs vertically. Elements that collide. Deliberately unresolved.</span>
+        </li>
+        <li>
+          <span class="decision-label">Imagery</span>
+          <span class="decision-text">Archival black and white photography combined with reproductions of Dada works, Duchamp's Fountain, Höch's photomontages, Hoerle's drawings.</span>
+        </li>
+        <li>
+          <span class="decision-label">Colour</span>
+          <span class="decision-text">Black, white, and red. The only colour in the document is used for emphasis, names, quotes, key terms, making it feel urgent rather than decorative.</span>
+        </li>
+        <li>
+          <span class="decision-label">Content</span>
+          <span class="decision-text">The article moves from the historical context of WWI Europe, to the birth of Dada, to its philosophy, to the central question, and then gives each woman her own section as a subject, not a footnote.</span>
+        </li>
+      </ul>
+      <div class="tools-row">
+        <span class="tool-tag">Adobe InDesign</span>
+        <span class="tool-tag">Adobe Photoshop</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── REMAINING SPREADS ── -->
+  <div class="spreads-section">
+    <div class="spread-img">
+      <img src="3.Portfolio/4.GD/ld_p03.jpg" alt="Lady Dada — spread 2" />
+    </div>
+    <div class="spread-img">
+      <img src="3.Portfolio/4.GD/ld_p04.jpg" alt="Lady Dada — spread 3" />
+    </div>
+    <div class="spread-img">
+      <img src="3.Portfolio/4.GD/ld_p05.jpg" alt="Lady Dada — spread 4" />
+    </div>
+    <div class="spread-img">
+      <img src="3.Portfolio/4.GD/ld_p06.jpg" alt="Lady Dada — spread 5" />
+    </div>
+    <div class="single-wrap">
+      <img src="3.Portfolio/4.GD/ld_p07.jpg" alt="Lady Dada — closing page" />
+    </div>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <div class="page-footer">
+    <a href="portfolio-mockup.html#graphic-design">← Home</a>
+  </div>
+
+  <!-- ── LIGHTBOX ── -->
+  <div id="lightbox">
+    <div id="lightbox-panel">
+      <img id="lightbox-img" src="" alt="" />
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.spread-img img, .single-wrap img').forEach(function(img) {
+      img.addEventListener('click', function() {
+        document.getElementById('lightbox-img').src = this.src;
+        document.getElementById('lightbox-img').alt = this.alt;
+        document.getElementById('lightbox').classList.add('open');
+      });
+    });
+
+    document.getElementById('lightbox').addEventListener('click', function() {
+      this.classList.remove('open');
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') document.getElementById('lightbox').classList.remove('open');
+    });
+  </script>
+
+</body>
+</html>

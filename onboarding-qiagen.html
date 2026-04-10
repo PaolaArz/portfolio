@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NGS Onboarding Redesign — Paola Arzuffi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --dark:       #5c1020;
+      --medium:     #7b1831;
+      --light:      #f7c9d1;
+      --lightest:   #fde8ec;
+      --ink:        #1C1C1C;
+      --mid:        #5A5A5A;
+      --border:     #edd5da;
+      --white:      #FFFFFF;
+      --section-bg: #FDFAF9;
+      --accent:     #C1526A;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--white);
+      color: var(--ink);
+      line-height: 1.7;
+    }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--dark);
+      padding: 14px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .topbar a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--light);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+
+    .topbar a:hover { color: var(--white); }
+
+    .topbar .section-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      color: rgba(247,201,209,0.6);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--dark);
+      padding: 36px 40px 32px;
+      border-top: 1px solid rgba(247,201,209,0.12);
+    }
+
+    .hero-inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .hero-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .hero h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 10px;
+      letter-spacing: -0.2px;
+    }
+
+    .hero-sub {
+      font-size: 0.95rem;
+      color: var(--light);
+      max-width: 600px;
+      opacity: 0.85;
+    }
+
+    /* ── SECTIONS ── */
+    .case-section {
+      padding: 56px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .case-section:last-of-type { border-bottom: none; }
+
+    .case-section.alt { background: var(--section-bg); }
+
+    .content-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--medium);
+      margin-bottom: 10px;
+      font-weight: 700;
+      display: block;
+    }
+
+    h2 {
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .body-text p {
+      font-size: 1rem;
+      color: var(--mid);
+      line-height: 1.8;
+      margin-bottom: 1em;
+    }
+
+    .body-text p:last-child { margin-bottom: 0; }
+
+    /* ── APPROACH BLOCKS ── */
+    .approach-block {
+      margin-top: 32px;
+      border-top: 1px solid var(--border);
+      padding-top: 28px;
+    }
+
+    .approach-block-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .approach-block p {
+      font-size: 1rem;
+      color: var(--mid);
+      line-height: 1.8;
+      margin-bottom: 1em;
+    }
+
+    .approach-block p:last-child { margin-bottom: 0; }
+
+    /* ── ACTIVITY TYPES ── */
+    .activity-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .activity-card {
+      background: var(--lightest);
+      border-radius: 6px;
+      padding: 18px 20px;
+    }
+
+    .activity-card-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .activity-card p {
+      font-size: 0.88rem;
+      color: var(--mid);
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    /* ── MEDIA BLOCKS ── */
+    .media-block {
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .media-block-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.63rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--medium);
+      font-weight: 700;
+    }
+
+    .media-block-caption {
+      font-size: 0.88rem;
+      color: var(--mid);
+      line-height: 1.65;
+    }
+
+    .slide-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .slide-grid img,
+    .media-block img {
+      width: 100%;
+      display: block;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      cursor: zoom-in;
+      transition: box-shadow 0.2s;
+    }
+
+    .slide-grid img:hover,
+    .media-block img:hover {
+      box-shadow: 0 4px 20px rgba(92,16,32,0.12);
+    }
+
+    /* ── HIGHLIGHT BOX ── */
+    .highlight {
+      background: var(--lightest);
+      border-left: 3px solid var(--medium);
+      border-radius: 0 6px 6px 0;
+      padding: 20px 24px;
+      margin-top: 20px;
+    }
+
+    .highlight p {
+      font-size: 0.95rem;
+      color: var(--ink);
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    /* ── IMPACT STATS ── */
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .impact-stat {
+      background: var(--lightest);
+      border-radius: 6px;
+      padding: 24px 16px;
+      text-align: center;
+    }
+
+    .impact-stat .big {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--dark);
+      display: block;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .impact-stat .desc {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--medium);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── LIGHTBOX ── */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(28, 10, 14, 0.6);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 48px;
+    }
+
+    #lightbox.open { display: flex; }
+
+    #lightbox-panel {
+      background: var(--white);
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 70vw;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+    }
+
+    #lightbox img {
+      max-width: 100%;
+      max-height: calc(85vh - 80px);
+      object-fit: contain;
+      border-radius: 4px;
+      display: block;
+    }
+
+    #lightbox-close {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--medium);
+      cursor: pointer;
+      background: none;
+      border: none;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+      align-self: flex-end;
+    }
+
+    #lightbox-close:hover { opacity: 1; }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      background: var(--dark);
+      padding: 40px;
+      text-align: center;
+    }
+
+    .page-footer a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--light);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .page-footer a:hover { color: var(--white); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 720px) {
+      .activity-grid, .slide-grid, .impact-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 1.4rem; }
+      .topbar, .hero, .case-section { padding-left: 20px; padding-right: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── TOP BAR ── -->
+  <div class="topbar">
+    <a href="portfolio-mockup.html#learning">← Home</a>
+    <span class="section-tag">Learning Design</span>
+  </div>
+
+  <!-- ── HERO ── -->
+  <div class="hero">
+    <div class="hero-inner">
+      <span class="hero-label">QIAGEN</span>
+      <h1>NGS Onboarding Program Redesign</h1>
+      <p class="hero-sub">Redesigning Field Application Specialist onboarding from a two-week face-to-face block into a blended program that cut live time by 58% while improving relevance and autonomy.</p>
+    </div>
+  </div>
+
+  <!-- ── CONTEXT ── -->
+  <section class="case-section">
+    <div class="content-wrap">
+      <span class="section-label">Context</span>
+      <h2>A global technical team with a slow, disconnected onboarding</h2>
+      <div class="body-text">
+        <p>The Field Application Specialists (FAS) at QIAGEN needed to support customers with complex NGS and bioinformatics questions. As a Global Product Support Specialist, I was responsible for their technical training. The existing onboarding was a two-week face-to-face program that focused on sharing technical knowledge without connecting it to the tasks FAS would actually perform in their daily job. It was slow, inefficient, and didn't reflect how a global team with different backgrounds and schedules actually learns.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PROBLEM ── -->
+  <section class="case-section alt">
+    <div class="content-wrap">
+      <span class="section-label">The Problem</span>
+      <h2>Two separate gaps, both needing a redesign</h2>
+      <div class="body-text">
+        <p>Two separate gaps existed. The first was structural: the onboarding program needed a complete redesign to make it faster, more relevant, and more learner-centred. The second was a knowledge gap I identified within my own GPS team: colleagues had no bioinformatics background and had never supported panel creation, which limited their ability to answer a specific category of customer questions confidently.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SOLUTION ── -->
+  <section class="case-section">
+    <div class="content-wrap">
+      <span class="section-label">The Solution</span>
+      <h2>A blended redesign and a new course to fill the gap</h2>
+      <div class="body-text">
+        <p>I redesigned the onboarding program from scratch, shifting the model from a single long face-to-face block to a blended program where theoretical knowledge was covered asynchronously before live sessions, freeing face-to-face time for troubleshooting and practical tasks. I also identified the bioinformatics gap proactively and built a separate course to address it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── MY ROLE ── -->
+  <section class="case-section alt">
+    <div class="content-wrap">
+      <span class="section-label">My Role</span>
+      <h2>Both projects, end to end</h2>
+      <div class="body-text">
+        <p>I owned both projects end to end, from needs analysis and gap identification, through design, development, and delivery. My background in bioinformatics and NGS was essential: without it, I couldn't have designed training at the depth and accuracy these audiences required.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── APPROACH ── -->
+  <section class="case-section">
+    <div class="content-wrap">
+      <span class="section-label">My Approach</span>
+      <h2>Structured for the way the team actually learns</h2>
+
+      <div class="approach-block">
+        <span class="approach-block-label">Onboarding redesign</span>
+        <p>The new program was built around three types of learning activities. Learners had autonomy over sequence and content — they could choose the modules relevant to their role and prior knowledge.</p>
+
+        <div class="activity-grid">
+          <div class="activity-card">
+            <span class="activity-card-label">Absorb</span>
+            <p>Theoretical background: eLearning modules built in Adobe Captivate with narration, interactive components and assessments, recorded lab procedure videos with detailed scripts, and written instructions with links to additional resources.</p>
+          </div>
+          <div class="activity-card">
+            <span class="activity-card-label">Do</span>
+            <p>Practice: guided exercises, data analysis simulations, and ungraded assessments that could be retaken until the learner felt confident.</p>
+          </div>
+          <div class="activity-card">
+            <span class="activity-card-label">Connect</span>
+            <p>Reference tools for daily use: infographics and job aids designed to be kept and used on the job after training ended.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="approach-block">
+        <span class="approach-block-label">Bioinformatics course</span>
+        <p>A practical asynchronous course covering the knowledge GPS colleagues needed to support panel creation and handle the customer questions they previously couldn't answer.</p>
+
+        <div class="media-block">
+          <span class="media-block-label">Slides — Bioinformatics eLearning modules</span>
+          <p class="media-block-caption">Screens from the eLearning course, showing the content structure and visual design used to teach NGS analysis concepts to a non-bioinformatics audience.</p>
+          <img src="3.Portfolio/1.Multimedia/15_qiagen_1.png" alt="QIAGEN eLearning — Tertiary Analysis slide" style="cursor:zoom-in;" />
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── IMPACT ── -->
+  <section class="case-section alt">
+    <div class="content-wrap">
+      <span class="section-label">Impact</span>
+      <h2>Faster onboarding, more confident specialists</h2>
+
+      <div class="impact-grid">
+        <div class="impact-stat">
+          <span class="big">58%</span>
+          <span class="desc">Reduction in face-to-face time</span>
+        </div>
+        <div class="impact-stat">
+          <span class="big">12→5</span>
+          <span class="desc">Days of live onboarding</span>
+        </div>
+        <div class="impact-stat">
+          <span class="big">↓</span>
+          <span class="desc">Escalation cases as team confidence grew</span>
+        </div>
+      </div>
+
+      <div class="highlight">
+        <p>The face-to-face component was reduced from 12 to 5 days. Live time was freed up entirely for troubleshooting and practical tasks. The bioinformatics course gave GPS colleagues the knowledge to handle a category of customer questions independently that they had previously needed to escalate.</p>
+      </div>
+
+      <div class="body-text" style="margin-top: 24px;">
+        <p>Escalation cases reduced as the team became more confident and capable.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── LIGHTBOX ── -->
+  <div id="lightbox">
+    <div id="lightbox-panel">
+      <button id="lightbox-close" onclick="closeLightbox()">✕ Close</button>
+      <img id="lightbox-img" src="" alt="" />
+    </div>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <div class="page-footer">
+    <a href="portfolio-mockup.html#learning">← Home</a>
+  </div>
+
+  <script>
+    document.querySelectorAll('.slide-grid img, .media-block img').forEach(function(img) {
+      img.addEventListener('click', function() {
+        document.getElementById('lightbox-img').src = this.src;
+        document.getElementById('lightbox-img').alt = this.alt;
+        document.getElementById('lightbox').classList.add('open');
+      });
+    });
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+    }
+
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+      if (e.target === this) closeLightbox();
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
+
+</body>
+</html>

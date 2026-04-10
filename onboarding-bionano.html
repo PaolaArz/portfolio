@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Building a Training Function from Scratch — Paola Arzuffi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --dark:       #5c1020;
+      --medium:     #7b1831;
+      --light:      #f7c9d1;
+      --lightest:   #fde8ec;
+      --ink:        #1C1C1C;
+      --mid:        #5A5A5A;
+      --border:     #edd5da;
+      --white:      #FFFFFF;
+      --section-bg: #FDFAF9;
+      --accent:     #C1526A;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--white);
+      color: var(--ink);
+      line-height: 1.7;
+    }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--dark);
+      padding: 14px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .topbar a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--light);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+
+    .topbar a:hover { color: var(--white); }
+
+    .topbar .section-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      color: rgba(247,201,209,0.6);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--dark);
+      padding: 36px 40px 32px;
+      border-top: 1px solid rgba(247,201,209,0.12);
+    }
+
+    .hero-inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .hero-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .hero h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 10px;
+      letter-spacing: -0.2px;
+    }
+
+    .hero-sub {
+      font-size: 0.95rem;
+      color: var(--light);
+      max-width: 600px;
+      opacity: 0.85;
+    }
+
+    /* ── SECTIONS ── */
+    .case-section {
+      padding: 56px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .case-section:last-of-type { border-bottom: none; }
+
+    .case-section.alt { background: var(--section-bg); }
+
+    .content-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--medium);
+      margin-bottom: 10px;
+      font-weight: 700;
+      display: block;
+    }
+
+    h2 {
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .body-text p {
+      font-size: 1rem;
+      color: var(--mid);
+      line-height: 1.8;
+      margin-bottom: 1em;
+    }
+
+    .body-text p:last-child { margin-bottom: 0; }
+
+    /* ── APPROACH BLOCKS ── */
+    .approach-block {
+      margin-top: 32px;
+      border-top: 1px solid var(--border);
+      padding-top: 28px;
+    }
+
+    .approach-block-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .approach-block p {
+      font-size: 1rem;
+      color: var(--mid);
+      line-height: 1.8;
+      margin-bottom: 1em;
+    }
+
+    .approach-block p:last-child { margin-bottom: 0; }
+
+    /* ── HIGHLIGHT BOX ── */
+    .highlight {
+      background: var(--lightest);
+      border-left: 3px solid var(--medium);
+      border-radius: 0 6px 6px 0;
+      padding: 20px 24px;
+      margin-top: 20px;
+    }
+
+    .highlight p {
+      font-size: 0.95rem;
+      color: var(--ink);
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    /* ── MEDIA BLOCKS (consistent with other pages) ── */
+    .media-block {
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .media-block-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.63rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--medium);
+      font-weight: 700;
+    }
+
+    .media-block-caption {
+      font-size: 0.88rem;
+      color: var(--mid);
+      line-height: 1.65;
+    }
+
+    .media-block img {
+      display: block;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      cursor: zoom-in;
+      transition: box-shadow 0.2s;
+    }
+
+    .media-block img:hover {
+      box-shadow: 0 4px 20px rgba(92,16,32,0.12);
+    }
+
+    /* side-by-side pair */
+    .media-pair {
+      display: flex;
+      gap: 16px;
+      margin-top: 28px;
+      align-items: flex-start;
+    }
+
+    .media-pair .media-block {
+      margin-top: 0;
+      flex: 1;
+    }
+
+    /* slide grid (3-up for FraX) */
+    .slide-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .slide-grid .media-block { margin-top: 0; }
+
+    .slide-grid img {
+      width: 100%;
+      display: block;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      cursor: zoom-in;
+      transition: box-shadow 0.2s;
+    }
+
+    .slide-grid img:hover {
+      box-shadow: 0 4px 20px rgba(92,16,32,0.12);
+    }
+
+    .datastorage-img {
+      margin-top: 20px;
+      max-width: 420px;
+      width: 100%;
+      display: block;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      cursor: zoom-in;
+      transition: box-shadow 0.2s;
+    }
+
+    .datastorage-img:hover {
+      box-shadow: 0 4px 20px rgba(92,16,32,0.12);
+    }
+
+    .slide-caption {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.63rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--medium);
+      margin-top: 10px;
+    }
+
+    /* ── LIGHTBOX ── */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(28, 10, 14, 0.6);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 48px;
+    }
+
+    #lightbox.open { display: flex; }
+
+    #lightbox-panel {
+      background: var(--white);
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 70vw;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+    }
+
+    #lightbox img {
+      max-width: 100%;
+      max-height: calc(85vh - 80px);
+      object-fit: contain;
+      border-radius: 4px;
+      display: block;
+    }
+
+    #lightbox-close {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--medium);
+      cursor: pointer;
+      background: none;
+      border: none;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+      align-self: flex-end;
+    }
+
+    #lightbox-close:hover { opacity: 1; }
+
+    /* ── IMPACT STATS ── */
+    .impact-stat {
+      background: var(--lightest);
+      border-radius: 6px;
+      padding: 24px 16px;
+      text-align: center;
+    }
+
+    .impact-stat .big {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--dark);
+      display: block;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .impact-stat .desc {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--medium);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      background: var(--dark);
+      padding: 40px;
+      text-align: center;
+    }
+
+    .page-footer a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--light);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .page-footer a:hover { color: var(--white); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 720px) {
+      .slide-grid { grid-template-columns: 1fr 1fr; }
+      .hero h1 { font-size: 1.4rem; }
+      .topbar, .hero, .case-section { padding-left: 20px; padding-right: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── TOP BAR ── -->
+  <div class="topbar">
+    <a href="portfolio-mockup.html#learning">← Home</a>
+    <span class="section-tag">Learning Design</span>
+  </div>
+
+  <!-- ── HERO ── -->
+  <div class="hero">
+    <div class="hero-inner">
+      <span class="hero-label">Bionano</span>
+      <h1>Building a Training Function from Scratch</h1>
+      <p class="hero-sub">Identifying three simultaneous gaps in a complex genomics company and building the training infrastructure to address all of them.</p>
+    </div>
+  </div>
+
+  <!-- ── CONTEXT ── -->
+  <section class="case-section">
+    <div class="content-wrap">
+      <span class="section-label">Context</span>
+      <h2>No training infrastructure, a genuinely complex technology</h2>
+      <div class="body-text">
+        <p>When I joined Bionano, there was no training infrastructure. Customer training was handled by the support team as needed, mostly slide-based, with no instructional design behind it. There was no internal training on scientific topics, and no structured support for the pre-installation process: just a series of confused meetings with clients, sales teams, and distributors trying to navigate complex data storage, IT setup, and safety questions without any shared reference material.</p>
+        <p>Bionano's technology, Optical Genome Mapping, was genuinely complex. Customers needed to understand it scientifically, technically, and operationally before they could use it successfully.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PROBLEM ── -->
+  <section class="case-section alt">
+    <div class="content-wrap">
+      <span class="section-label">The Problem</span>
+      <h2>Three simultaneous gaps, none of them small</h2>
+      <div class="body-text">
+        <p>Three separate gaps existed simultaneously. Customers lacked structured onboarding that could take them from first contact to confident use of the technology. Internal colleagues had no training on the scientific topics underpinning the product. And the pre-installation process was a bottleneck: nobody had clear answers to the questions that consistently came up before a system could be installed, which slowed everything down and created anxiety on both sides.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SOLUTION ── -->
+  <section class="case-section">
+    <div class="content-wrap">
+      <span class="section-label">The Solution</span>
+      <h2>A training function built from nothing</h2>
+      <div class="body-text">
+        <p>I identified all three gaps and built a training function to address them, proposing each initiative, defining the format, and building the materials. For the pre-installation gap, I set up a working group with sales to systematically map the recurring questions and create material that could be used across customers, distributors, and partners.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── MY ROLE ── -->
+  <section class="case-section alt">
+    <div class="content-wrap">
+      <span class="section-label">My Role</span>
+      <h2>Every project, end to end, without a precedent to follow</h2>
+      <div class="body-text">
+        <p>I owned every project end to end, from identifying the need and proposing the solution, to content design, production, and delivery. My background in biology and bioinformatics was essential: without it, I couldn't have designed training on Optical Genome Mapping, Fragile X, or FSHD to the level of accuracy and depth these audiences required. For customer training I also delivered face-to-face sessions directly. All of this was built without an existing framework, team, or precedent to follow.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── APPROACH ── -->
+  <section class="case-section">
+    <div class="content-wrap">
+      <span class="section-label">My Approach</span>
+      <h2>Each audience got a different format</h2>
+
+      <div class="approach-block">
+        <span class="approach-block-label">Internal science training</span>
+        <p>Live sessions on complex scientific topics including Fragile X analysis and FSHD, designed following Gagné's Nine Instructional Events to ensure attention, clear objectives, active recall, and transfer to practice. Each session came with a facilitator guide and handover materials so the training could be reused after delivery.</p>
+        <p>For colleagues who couldn't attend live, asynchronous material was provided including interactive slides with animation and voiceover.</p>
+        <div class="highlight">
+          <p>Where the topic was particularly abstract, like conditional probability in the Fragile X statistics module, I used scenarios to make the concept tangible: learners placed bets on a Formula 1 race, then received new information round by round to experience how probability shifts with context.</p>
+        </div>
+
+        <div style="margin-top: 24px;">
+          <span class="media-block-label">Slides — Fragile X internal science training</span>
+          <p class="media-block-caption">A selection of slides from the session, covering the diagnostic classification system, the conditional probability scenario used to open the statistics module, and the OGM assembly workflow.</p>
+          <div class="slide-grid">
+            <img src="3.Portfolio/3.Bionano/frax_7.jpg" alt="Fragile X training — CGG repeat ranges" />
+            <img src="3.Portfolio/3.Bionano/frax_10.jpg" alt="Fragile X training — Formula 1 scenario" />
+            <img src="3.Portfolio/3.Bionano/frax_15.jpg" alt="Fragile X training — OGM workflow" />
+          </div>
+        </div>
+      </div>
+
+      <div class="approach-block">
+        <span class="approach-block-label">Customer training</span>
+        <p>Face-to-face technical sessions delivered directly to customers, supported by a facilitator guide structuring the order of topics and what was needed for each session. To support customers between and after sessions, I also produced asynchronous performance support materials: infographics for software updates and hand-drawn "How To" cheatsheets explaining specific software features, visual, action-oriented, designed to be used directly at the bench without needing to contact support.</p>
+        <p>Training was evaluated using the first two levels of the Kirkpatrick Model, measuring learner reactions, knowledge transfer, confidence, and attitudes.</p>
+
+        <div class="media-block">
+          <span class="media-block-label">Infographic — Software update</span>
+          <p class="media-block-caption">Hand-annotated release notes translating technical patch details into plain-language highlights for lab users.</p>
+          <img src="3.Portfolio/3.Bionano/102_software_updates.jpg" alt="Software updates infographic" style="max-width: 600px;" />
+        </div>
+
+        <div style="margin-top: 28px;">
+          <span class="media-block-label">How To cheatsheets — software features</span>
+          <p class="media-block-caption">Hand-drawn step-by-step references for specific actions in the genome browser view, designed to be used directly at the bench.</p>
+          <div style="display: flex; gap: 16px; margin-top: 12px; align-items: flex-start;">
+            <img src="3.Portfolio/3.Bionano/103_how_to_1.jpg" alt="How To — selecting maps" style="max-width: 260px; width: 100%; border-radius: 6px; border: 1px solid var(--border); cursor: zoom-in;" />
+            <img src="3.Portfolio/3.Bionano/104_how_to_2.jpg" alt="How To — moving maps" style="max-width: 260px; width: 100%; border-radius: 6px; border: 1px solid var(--border); cursor: zoom-in;" />
+          </div>
+        </div>
+      </div>
+
+      <div class="approach-block">
+        <span class="approach-block-label">Pre-installation support materials</span>
+        <p>A structured cheatsheet for sales teams and distributors covering data storage, IT setup, and safety questions, plus infographics showing the technical setup of computers and data transfer requirements. Designed to give anyone going into a first client meeting the answers they needed immediately, without escalating to support.</p>
+
+        <div class="media-block">
+          <span class="media-block-label">Infographic — SAPHYR system IT setup</span>
+          <p class="media-block-caption">Visual overview of the full SAPHYR system architecture: hardware, software, network, data storage, and safety considerations — designed for use in pre-installation meetings.</p>
+          <img src="3.Portfolio/3.Bionano/101_infographics_IT.jpg" alt="SAPHYR system IT setup infographic" />
+        </div>
+
+        <div class="media-block">
+          <span class="media-block-label">Cheatsheet — Data storage and safety questions</span>
+          <p class="media-block-caption">Structured reference covering the most common pre-installation questions on data storage, access, cloud options, and safety — one page, ready to use in any first client meeting.</p>
+          <img src="3.Portfolio/3.Bionano/datastorage_1.jpg" alt="Data storage cheatsheet" style="max-width: 380px;" />
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── IMPACT ── -->
+  <section class="case-section alt">
+    <div class="content-wrap">
+      <span class="section-label">Impact</span>
+      <h2>A training function that hadn't existed before now did</h2>
+      <div class="impact-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px;">
+        <div class="impact-stat">
+          <span class="big">↓</span>
+          <span class="desc">Ramp-up time for customers and colleagues</span>
+        </div>
+        <div class="impact-stat">
+          <span class="big">↓</span>
+          <span class="desc">Support ticket volume</span>
+        </div>
+        <div class="impact-stat">
+          <span class="big">3</span>
+          <span class="desc">Training programmes built from nothing</span>
+        </div>
+      </div>
+      <div class="body-text">
+        <p>The pre-installation process became structured and repeatable: sales teams and distributors could go into first meetings equipped and confident rather than improvising.</p>
+        <p>Most importantly: a training function that hadn't existed before now did.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── LIGHTBOX ── -->
+  <div id="lightbox">
+    <div id="lightbox-panel">
+      <button id="lightbox-close" onclick="closeLightbox()">✕ Close</button>
+      <img id="lightbox-img" src="" alt="" />
+    </div>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <div class="page-footer">
+    <a href="portfolio-mockup.html#learning">← Home</a>
+  </div>
+
+  <script>
+    document.querySelectorAll('.slide-grid img, .media-block img, [style*="zoom-in"]').forEach(function(img) {
+      img.addEventListener('click', function() {
+        document.getElementById('lightbox-img').src = this.src;
+        document.getElementById('lightbox-img').alt = this.alt;
+        document.getElementById('lightbox').classList.add('open');
+      });
+    });
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+    }
+
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+      if (e.target === this) closeLightbox();
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
+
+</body>
+</html>

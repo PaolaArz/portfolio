@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>In-App Training Guides — Paola Arzuffi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --dark:       #5c1020;
+      --medium:     #7b1831;
+      --light:      #f7c9d1;
+      --lightest:   #fde8ec;
+      --ink:        #1C1C1C;
+      --mid:        #5A5A5A;
+      --border:     #edd5da;
+      --white:      #FFFFFF;
+      --section-bg: #FDFAF9;
+      --accent:     #C1526A;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--white);
+      color: var(--ink);
+      line-height: 1.7;
+    }
+
+    /* ── TOP BAR (sticky) ── */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--dark);
+      padding: 14px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .topbar a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--light);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+
+    .topbar a:hover { color: var(--white); }
+
+    .topbar .section-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      color: rgba(247,201,209,0.6);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ── HERO (compact) ── */
+    .hero {
+      background: var(--dark);
+      padding: 36px 40px 32px;
+      border-top: 1px solid rgba(247,201,209,0.12);
+    }
+
+    .hero-inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .hero-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .hero h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 10px;
+      letter-spacing: -0.2px;
+    }
+
+    .hero-sub {
+      font-size: 0.95rem;
+      color: var(--light);
+      max-width: 600px;
+      opacity: 0.85;
+    }
+
+    /* ── CONTENT ── */
+    .content-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* ── SECTIONS ── */
+    .case-section {
+      padding: 56px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .case-section:last-of-type { border-bottom: none; }
+
+    .case-section.alt { background: var(--section-bg); }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--medium);
+      margin-bottom: 10px;
+      font-weight: 700;
+      display: block;
+    }
+
+    h2 {
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .body-text p {
+      font-size: 1rem;
+      color: var(--mid);
+      line-height: 1.8;
+      margin-bottom: 1em;
+    }
+
+    .body-text p:last-child { margin-bottom: 0; }
+
+    /* ── HIGHLIGHT BOX ── */
+    .highlight {
+      background: var(--lightest);
+      border-left: 3px solid var(--medium);
+      border-radius: 0 6px 6px 0;
+      padding: 20px 24px;
+      margin-top: 24px;
+    }
+
+    .highlight p {
+      font-size: 0.95rem;
+      color: var(--ink);
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    /* ── PRINCIPLES LIST ── */
+    .principles {
+      list-style: none;
+      padding: 0;
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .principles li {
+      font-size: 0.93rem;
+      color: var(--lightest);
+      line-height: 1.6;
+      padding: 12px 16px;
+      background: var(--medium);
+      border-radius: 4px;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .principles li::before {
+      content: '→';
+      font-size: 0.75rem;
+      color: var(--light);
+      flex-shrink: 0;
+    }
+
+    /* ── MEDIA BLOCK ── */
+    .media-block {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 40px;
+    }
+
+    .media-block-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.63rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--medium);
+      font-weight: 700;
+    }
+
+    .media-block-caption {
+      font-size: 0.88rem;
+      color: var(--mid);
+      line-height: 1.65;
+    }
+
+    .media-block video {
+      width: 100%;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      display: block;
+      background: #000;
+    }
+
+    /* ── MEDIA LOCK GATE ── */
+    .media-gate {
+      position: relative;
+    }
+
+    .media-gate .gate-overlay {
+      position: absolute;
+      inset: 0;
+      background: var(--dark);
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: background 0.2s;
+      z-index: 2;
+    }
+
+    .media-gate .gate-overlay:hover { background: var(--medium); }
+
+    .gate-icon { font-size: 1.5rem; line-height: 1; }
+
+    .gate-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--light);
+    }
+
+    .gate-hint { font-size: 0.78rem; color: rgba(247,201,209,0.55); }
+
+    .gate-error { font-size: 0.78rem; color: #f87; display: none; }
+
+    .gate-input-row { display: flex; gap: 8px; margin-top: 4px; }
+
+    .gate-input-row input {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem;
+      padding: 7px 12px;
+      border: 1px solid rgba(247,201,209,0.3);
+      border-radius: 4px;
+      background: rgba(255,255,255,0.07);
+      color: var(--white);
+      outline: none;
+      width: 160px;
+      letter-spacing: 0.06em;
+    }
+
+    .gate-input-row input::placeholder { color: rgba(247,201,209,0.35); }
+    .gate-input-row input:focus { border-color: rgba(247,201,209,0.6); }
+
+    .gate-input-row button {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 7px 14px;
+      background: var(--accent);
+      color: var(--white);
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .gate-input-row button:hover { background: var(--medium); }
+
+    .gate-placeholder {
+      width: 100%;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: #f0e8ea;
+    }
+
+    /* ── IMPACT STATS ── */
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .impact-stat {
+      background: var(--lightest);
+      border-radius: 6px;
+      padding: 24px 16px;
+      text-align: center;
+    }
+
+    .impact-stat .big {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--dark);
+      display: block;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .impact-stat .desc {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--medium);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      background: var(--dark);
+      padding: 40px;
+      text-align: center;
+    }
+
+    .page-footer a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--light);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .page-footer a:hover { color: var(--white); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 720px) {
+      .impact-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero h1 { font-size: 1.4rem; }
+      .topbar, .hero, .case-section { padding-left: 20px; padding-right: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── TOP BAR ── -->
+  <div class="topbar">
+    <a href="portfolio-mockup.html#learning">← Home</a>
+    <span class="section-tag">Learning Design</span>
+  </div>
+
+  <!-- ── HERO ── -->
+  <div class="hero">
+    <div class="hero-inner">
+      <span class="hero-label">Make</span>
+      <h1>In-App Training Guides</h1>
+      <p class="hero-sub">Purpose-built in-app guides designed to help users build their first AI agent directly inside Make, without leaving the platform.</p>
+    </div>
+  </div>
+
+  <!-- ── CONTEXT ── -->
+  <section class="case-section">
+    <div class="content-wrap">
+      <span class="section-label">Context</span>
+      <h2>Users needed help exactly where they were</h2>
+      <div class="body-text">
+        <p>Make's platform already had a Resource page inside the product, containing content to help users get started with Make with some practical steps to follow. As Make launched its AI features, the need for practical, in-context guidance became more pressing. Users arriving in the platform to build their first AI agent needed help exactly where they were, not a separate tab away.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PROBLEM ── -->
+  <section class="case-section alt">
+    <div class="content-wrap">
+      <span class="section-label">The Problem</span>
+      <h2>Existing content wasn't built for this user</h2>
+      <div class="body-text">
+        <p>The existing resource content covered general Make usage and wasn't owned or developed by the Academy. There was nothing specific to AI Agents, no guidance for users who had arrived in the platform specifically to build their first AI-powered workflow.</p>
+        <p>And the content that existed wasn't built around how these users actually behave: impatient, task-focused, with low tolerance for theory and a high abandonment risk if they couldn't see progress within minutes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SOLUTION ── -->
+  <section class="case-section">
+    <div class="content-wrap">
+      <span class="section-label">The Solution</span>
+      <h2>In-app guides built around practice, not theory</h2>
+      <div class="body-text">
+        <p>I proposed a new approach to my manager and presented it to the growth team: purpose-built in-app guides designed from scratch, linked to the two AI learning paths, with a clear division of labour. The Academy would handle theory and demonstration. The in-app guides would handle practice, giving users a step-by-step path to build an AI agent directly inside Make, without needing to leave the platform.</p>
+        <p>The guides were designed with two entry points in mind: users arriving from the Academy courses via a direct link, and users discovering the guides independently inside the platform. For the latter, a link back to the Academy was included for anyone wanting more context or theoretical grounding.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── MY ROLE ── -->
+  <section class="case-section alt">
+    <div class="content-wrap">
+      <span class="section-label">My Role</span>
+      <h2>End to end, from concept to storyboard</h2>
+      <div class="body-text">
+        <p>I owned the project end to end, from proposing the concept and aligning with the growth team, to gathering technical constraints of the authoring tool, to deciding the content structure, format, what multimedia to include, and storyboarding the final product.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── APPROACH ── -->
+  <section class="case-section">
+    <div class="content-wrap">
+      <span class="section-label">My Approach</span>
+      <h2>Persona first, principles always</h2>
+      <div class="body-text">
+        <p>The learner persona was central to every design decision. The target user: a business owner with no Make experience, motivated by a specific problem to solve, and willing to engage only if they saw progress fast, shaped the format, length, tone, and structure of every guide.</p>
+        <p>Each guide followed a strict set of principles derived from the persona:</p>
+      </div>
+
+      <ul class="principles">
+        <li>Action-first language starting with verbs</li>
+        <li>One clear step at a time</li>
+        <li>No preambles</li>
+        <li>Maximum 2–3 sentences per instruction</li>
+        <li>Explanations only when they answered "so that what?"</li>
+        <li>Make-specific terminology always explained with a utility-focused sentence, not how the feature works internally, but what it does for the user</li>
+      </ul>
+
+      <div class="highlight">
+        <p>The two guides, one per learning path, each contained multiple subchapters covering the practical steps of building an AI agent in Make. The approach throughout was "to obtain X, do Y": every instruction tied to a concrete outcome the user was trying to achieve.</p>
+      </div>
+
+      <div class="media-block">
+        <span class="media-block-label">Video — In-App Guide walkthrough</span>
+        <p class="media-block-caption">A walkthrough of one of the in-app guides, showing the structure, tone and step-by-step format designed for task-focused users building inside Make.</p>
+        <div class="media-gate" id="gate-vid">
+          <div class="gate-overlay" id="overlay-vid">
+            <span class="gate-icon">🔒</span>
+            <span class="gate-label">Protected content</span>
+            <span class="gate-hint">Enter password to view</span>
+            <div class="gate-input-row">
+              <input type="password" id="pw-vid" placeholder="Password" autocomplete="off" />
+              <button onclick="unlock()">Unlock</button>
+            </div>
+            <span class="gate-error" id="err-vid">Incorrect password</span>
+          </div>
+          <div class="gate-placeholder" style="height:240px;"></div>
+          <video controls id="media-vid" style="display:none;">
+            <source src="3.Portfolio/1.Multimedia/5_In_app_video.mp4" type="video/mp4">
+            Your browser does not support this video format.
+          </video>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── IMPACT ── -->
+  <section class="case-section alt">
+    <div class="content-wrap">
+      <span class="section-label">Impact</span>
+      <h2>Practice available directly inside Make</h2>
+      <div class="highlight" style="margin-bottom: 28px;">
+        <p>The guides made the practical part of the AI learning paths available directly inside Make, removing the friction of switching between the platform and the Academy to practice.</p>
+      </div>
+      <div class="body-text">
+        <p>Users could either follow the full learning journey through the Academy and use the guides to apply what they had learned, or go straight to the guides inside Make and build an AI agent from scratch without prior Academy training.</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const PASS = 'PA_2026';
+
+    function unlock() {
+      const input = document.getElementById('pw-vid');
+      const err   = document.getElementById('err-vid');
+      const overlay = document.getElementById('overlay-vid');
+      const media   = document.getElementById('media-vid');
+      const gate    = document.getElementById('gate-vid');
+
+      if (input.value === PASS) {
+        overlay.style.display = 'none';
+        gate.querySelector('.gate-placeholder').style.display = 'none';
+        media.style.display = 'block';
+      } else {
+        err.style.display = 'block';
+        input.value = '';
+        input.focus();
+      }
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && document.activeElement.id === 'pw-vid') unlock();
+    });
+  </script>
+
+  <!-- ── FOOTER ── -->
+  <div class="page-footer">
+    <a href="portfolio-mockup.html#learning">← Home</a>
+  </div>
+
+</body>
+</html>

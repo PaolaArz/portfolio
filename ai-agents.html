@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Agents Learning Paths — Paola Arzuffi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --dark:       #5c1020;
+      --medium:     #7b1831;
+      --light:      #f7c9d1;
+      --lightest:   #fde8ec;
+      --ink:        #1C1C1C;
+      --mid:        #5A5A5A;
+      --border:     #edd5da;
+      --white:      #FFFFFF;
+      --section-bg: #FDFAF9;
+      --accent:     #C1526A;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--white);
+      color: var(--ink);
+      line-height: 1.7;
+    }
+
+    /* ── TOP BAR (sticky) ── */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--dark);
+      padding: 14px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .topbar a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--light);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+
+    .topbar a:hover { color: var(--white); }
+
+    .topbar .section-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      color: rgba(247,201,209,0.6);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ── HERO (compact) ── */
+    .hero {
+      background: var(--dark);
+      padding: 36px 40px 32px;
+      border-top: 1px solid rgba(247,201,209,0.12);
+    }
+
+    .hero-inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .hero-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .hero h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 10px;
+      letter-spacing: -0.2px;
+    }
+
+    .hero-sub {
+      font-size: 0.95rem;
+      color: var(--light);
+      max-width: 600px;
+      opacity: 0.85;
+    }
+
+    /* ── CONTENT ── */
+    .content-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* ── SECTIONS ── */
+    .case-section {
+      padding: 56px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .case-section:last-of-type { border-bottom: none; }
+
+    .case-section.alt { background: var(--section-bg); }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--medium);
+      margin-bottom: 10px;
+      font-weight: 700;
+      display: block;
+    }
+
+    h2 {
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .body-text p {
+      font-size: 1rem;
+      color: var(--mid);
+      line-height: 1.8;
+      margin-bottom: 1em;
+    }
+
+    .body-text p:last-child { margin-bottom: 0; }
+
+    /* ── TWO-COL LAYOUT ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 8px;
+    }
+
+    /* ── COURSE CARDS ── */
+    .course-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .course-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      flex-shrink: 0;
+    }
+
+    .course-card-body {
+      padding: 20px 24px 24px;
+    }
+
+    .course-card-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.63rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .course-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+
+    .course-card p {
+      font-size: 0.88rem;
+      color: var(--mid);
+      line-height: 1.65;
+      margin-bottom: 14px;
+    }
+
+    .course-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .course-list li {
+      font-size: 0.84rem;
+      color: var(--mid);
+      padding: 5px 0;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .course-list li::before {
+      content: '→';
+      font-size: 0.75rem;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* ── MEDIA SECTION ── */
+    .media-block {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 40px;
+    }
+
+    .media-block-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.63rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--medium);
+      font-weight: 700;
+    }
+
+    .media-block-caption {
+      font-size: 0.88rem;
+      color: var(--mid);
+      line-height: 1.65;
+    }
+
+    .media-block img,
+    .media-block video {
+      width: 100%;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      display: block;
+    }
+
+    .media-block video {
+      background: #000;
+    }
+
+    /* ── IMPACT STATS ── */
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .impact-stat {
+      background: var(--lightest);
+      border-radius: 6px;
+      padding: 24px 16px;
+      text-align: center;
+    }
+
+    .impact-stat .big {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--dark);
+      display: block;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .impact-stat .desc {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--medium);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── MEDIA LOCK GATE ── */
+    .media-gate {
+      position: relative;
+    }
+
+    .media-gate .gate-overlay {
+      position: absolute;
+      inset: 0;
+      background: var(--dark);
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: background 0.2s;
+      z-index: 2;
+    }
+
+    .media-gate .gate-overlay:hover { background: var(--medium); }
+
+    .gate-icon {
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    .gate-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--light);
+    }
+
+    .gate-hint {
+      font-size: 0.78rem;
+      color: rgba(247,201,209,0.55);
+    }
+
+    .gate-error {
+      font-size: 0.78rem;
+      color: #f87;
+      display: none;
+    }
+
+    .gate-input-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .gate-input-row input {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem;
+      padding: 7px 12px;
+      border: 1px solid rgba(247,201,209,0.3);
+      border-radius: 4px;
+      background: rgba(255,255,255,0.07);
+      color: var(--white);
+      outline: none;
+      width: 160px;
+      letter-spacing: 0.06em;
+    }
+
+    .gate-input-row input::placeholder { color: rgba(247,201,209,0.35); }
+    .gate-input-row input:focus { border-color: rgba(247,201,209,0.6); }
+
+    .gate-input-row button {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 7px 14px;
+      background: var(--accent);
+      color: var(--white);
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .gate-input-row button:hover { background: var(--medium); }
+
+    /* placeholder sizing for locked media */
+    .media-gate img,
+    .media-gate video {
+      display: block;
+    }
+
+    .media-gate .gate-placeholder {
+      width: 100%;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: #f0e8ea;
+    }
+
+    /* ── HIGHLIGHT BOX ── */
+    .highlight {
+      background: var(--lightest);
+      border-left: 3px solid var(--medium);
+      border-radius: 0 6px 6px 0;
+      padding: 20px 24px;
+      margin-top: 24px;
+    }
+
+    .highlight p {
+      font-size: 0.95rem;
+      color: var(--ink);
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      background: var(--dark);
+      padding: 40px;
+      text-align: center;
+    }
+
+    .page-footer a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--light);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .page-footer a:hover { color: var(--white); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 720px) {
+      .two-col, .impact-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 1.4rem; }
+      .topbar, .hero, .case-section { padding-left: 20px; padding-right: 20px; }
+      .impact-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── TOP BAR (sticky) ── -->
+  <div class="topbar">
+    <a href="portfolio-mockup.html#learning">← Home</a>
+    <span class="section-tag">Learning Design</span>
+  </div>
+
+  <!-- ── HERO (compact) ── -->
+  <div class="hero">
+    <div class="hero-inner">
+      <span class="hero-label">Make Academy</span>
+      <h1>AI Agents Learning Paths</h1>
+      <p class="hero-sub">Two full learning paths designed from scratch to take Make users from zero AI knowledge to building production-ready agents.</p>
+    </div>
+  </div>
+
+  <!-- ── CONTEXT ── -->
+  <section class="case-section">
+    <div class="content-wrap">
+      <span class="section-label">Context</span>
+      <h2>AI Agents were new territory — for Make and for its users</h2>
+      <div class="body-text">
+        <p>As AI became impossible to ignore, Make recognised early that it needed to position itself as a serious player in the AI space, not just an automation tool. This meant helping users understand AI broadly and incorporate it into their existing workflows.</p>
+        <p>When Make launched its AI Agents feature, there was no existing training for it, neither for beginners, nor for advanced users. The feature was new, the topic was complex, and the audience ranged from people with zero AI knowledge to experienced builders who just needed to learn how to use agents inside Make specifically.</p>
+        <p>The challenge wasn't just teaching a tool. AI Agents were unfamiliar territory for most users: conceptually hard to grasp, easy to misuse, and with no precedent inside Make's existing training library.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PROBLEM ── -->
+  <section class="case-section alt">
+    <div class="content-wrap">
+      <span class="section-label">The Problem</span>
+      <h2>Two layers of barriers to adoption</h2>
+      <div class="body-text">
+        <p>To identify the real barriers to adoption, I ran workshops with product and growth teams and worked directly with SMEs. Those sessions surfaced two distinct layers of challenges.</p>
+        <p>The first was broader: users were unfamiliar with AI in general, what it was, how it worked, and how it could add value to their existing Make workflows. Before they could think about agents, they needed to understand AI itself.</p>
+        <p>The second was specific to agents: users didn't know what AI Agents were, didn't understand how they worked, couldn't tell when it made sense to use them versus standard automation, and — critically — couldn't make the agent actually do what they wanted. That last point was the hardest to solve: getting an agent to behave reliably requires a kind of thinking most users hadn't developed yet.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SOLUTION ── -->
+  <section class="case-section">
+    <div class="content-wrap">
+      <span class="section-label">The Solution</span>
+      <h2>Two learning paths built for two completely different audiences</h2>
+      <div class="body-text">
+        <p>To address these barriers, I designed two full learning paths from scratch: one for users new to AI, one for experienced builders ready to work with production-ready agents.</p>
+        <p>The paths were built to teach the theoretical knowledge behind AI and AI Agents concepts, giving users the understanding of what to use and why. They also served a strategic purpose: positioning Make as a reference point in the AI space and drawing attention to Make Academy. Finally, both paths covered how to use these features effectively inside Make, with practical guidelines and good practices.</p>
+      </div>
+
+      <div class="two-col" style="margin-top: 36px;">
+
+        <div class="course-card">
+          <img src="3.Portfolio/1.Multimedia/1_AI_foundation.png" alt="Automation to AI Agents: Foundation learning path" />
+          <div class="course-card-body">
+            <span class="course-card-tag">Foundation · Beginner</span>
+            <h3>Automation to AI Agents: Foundation</h3>
+            <p>Six courses structured to take a complete beginner to confident first use. Covers AI fundamentals through to hands-on agent building inside Make.</p>
+            <ul class="course-list">
+              <li>AI Fundamentals</li>
+              <li>Mastering LLMs</li>
+              <li>Using AI in Make</li>
+              <li>AI Agents</li>
+              <li>AI, AI agents and automation</li>
+              <li>AI Agents in Make</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="course-card">
+          <img src="3.Portfolio/1.Multimedia/2_AI_advanced.png" alt="Automation to AI Agents: Advanced Builder learning path" />
+          <div class="course-card-body">
+            <span class="course-card-tag">Advanced Builder · Experienced Make users</span>
+            <h3>Automation to AI Agents: Advanced Builder</h3>
+            <p>Five courses built for experienced Make users ready to build production-ready agents that actually work reliably in real workflows.</p>
+            <ul class="course-list">
+              <li>MCP</li>
+              <li>Information management and security</li>
+              <li>Context engineering</li>
+              <li>Tools and AI agent settings</li>
+              <li>Design and build a production-ready AI agent</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="highlight">
+        <p>Each course runs 30–50 minutes, giving approximately 3–4 hours of learning per path. Both follow a consistent instructional logic: what something is, how it works, why you need it, how to use it in Make.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── MY ROLE ── -->
+  <section class="case-section alt">
+    <div class="content-wrap">
+      <span class="section-label">My Role</span>
+      <h2>End to end, from workshops to delivery</h2>
+      <div class="body-text">
+        <p>I owned the full process: from the initial workshops with product and growth teams through to learning path design, content structure, storyboarding, and supporting final delivery. No brief handed to me, I identified the problem, defined the solution, and built it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── APPROACH ── -->
+  <section class="case-section">
+    <div class="content-wrap">
+      <span class="section-label">My Approach</span>
+      <h2>Audience first, then structure</h2>
+      <div class="body-text">
+        <p>From the workshops I identified two completely distinct audiences that needed different programs. That shaped the decision to build two separate learning paths rather than one — a single path would have been too basic for advanced builders and too overwhelming for beginners.</p>
+        <p>For both paths I followed a consistent instructional logic: what something is, how it works, why you need it, how to use it in Make. This structure directly addressed the core pain point — users needed conceptual grounding before they could make good decisions about when and how to use agents.</p>
+        <p>The Foundation path was designed to take someone with no AI knowledge and give them enough understanding to start experimenting with confidence. The Advanced path assumed existing Make expertise and focused entirely on what it takes to build agents that actually work reliably in real production workflows, something that didn't exist anywhere inside Make's training library before this.</p>
+      </div>
+
+      <!-- Screenshot gate -->
+      <div class="media-block">
+        <span class="media-block-label">Screenshot — Foundation Learning Path</span>
+        <p class="media-block-caption">A page from a unit of the AI agents in Make course, showing the course layout and learning experience inside Make Academy.</p>
+        <div class="media-gate" id="gate-img">
+          <div class="gate-overlay" id="overlay-img">
+            <span class="gate-icon">🔒</span>
+            <span class="gate-label">Protected content</span>
+            <span class="gate-hint">Enter password to view</span>
+            <div class="gate-input-row">
+              <input type="password" id="pw-img" placeholder="Password" autocomplete="off" />
+              <button onclick="unlock('img')">Unlock</button>
+            </div>
+            <span class="gate-error" id="err-img">Incorrect password</span>
+          </div>
+          <div class="gate-placeholder" style="height:320px;"></div>
+          <img src="3.Portfolio/1.Multimedia/3_Foundation_example.jpg" alt="Foundation course sample slide" style="display:none;" id="media-img" />
+        </div>
+      </div>
+
+      <!-- Video gate -->
+      <div class="media-block">
+        <span class="media-block-label">Video — Advanced Builder unit walkthrough</span>
+        <p class="media-block-caption">A walkthrough of a unit from the MCP course, showing course structure, content depth and learning experience.</p>
+        <div class="media-gate" id="gate-vid">
+          <div class="gate-overlay" id="overlay-vid">
+            <span class="gate-icon">🔒</span>
+            <span class="gate-label">Protected content</span>
+            <span class="gate-hint">Enter password to view</span>
+            <div class="gate-input-row">
+              <input type="password" id="pw-vid" placeholder="Password" autocomplete="off" />
+              <button onclick="unlock('vid')">Unlock</button>
+            </div>
+            <span class="gate-error" id="err-vid">Incorrect password</span>
+          </div>
+          <div class="gate-placeholder" style="height:240px;"></div>
+          <video controls id="media-vid" style="display:none;">
+            <source src="3.Portfolio/1.Multimedia/4_Advanced_video.mp4" type="video/mp4">
+            Your browser does not support this video format.
+          </video>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── IMPACT ── -->
+  <section class="case-section alt">
+    <div class="content-wrap">
+      <span class="section-label">Impact</span>
+      <h2>High satisfaction on a technically complex topic</h2>
+      <div class="impact-grid">
+        <div class="impact-stat">
+          <span class="big">2,500+</span>
+          <span class="desc">Badges earned</span>
+        </div>
+        <div class="impact-stat">
+          <span class="big">90%+</span>
+          <span class="desc">Learner satisfaction</span>
+        </div>
+        <div class="impact-stat">
+          <span class="big">2</span>
+          <span class="desc">Learning paths</span>
+        </div>
+        <div class="impact-stat">
+          <span class="big">11</span>
+          <span class="desc">Courses</span>
+        </div>
+      </div>
+      <div class="body-text" style="margin-top: 32px;">
+        <p>The 90%+ satisfaction rate is unusually high for technical content covering a complex and fast-moving topic. Beyond the numbers, the paths contributed to increased adoption of AI Agents among Make users.</p>
+        <p>Learners who completed the Foundation path had the conceptual grounding to start experimenting with AI features in their workflows. Those who completed the Advanced Builder path had a practical, step-by-step framework for building production-ready agents.</p>
+        <p>The learning paths also reinforced Make's positioning as a serious player in the AI space, not just an automation tool.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <div class="page-footer">
+    <a href="portfolio-mockup.html#learning">← Home</a>
+  </div>
+
+  <script>
+    const PASS = 'PA_2026';
+
+    function unlock(key) {
+      const input = document.getElementById('pw-' + key);
+      const err   = document.getElementById('err-' + key);
+      const overlay = document.getElementById('overlay-' + key);
+      const media   = document.getElementById('media-' + key);
+      const gate    = document.getElementById('gate-' + key);
+
+      if (input.value === PASS) {
+        overlay.style.display = 'none';
+        gate.querySelector('.gate-placeholder').style.display = 'none';
+        media.style.display = 'block';
+      } else {
+        err.style.display = 'block';
+        input.value = '';
+        input.focus();
+      }
+    }
+
+    // Allow pressing Enter to submit
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        const focused = document.activeElement;
+        if (focused && focused.id === 'pw-img') unlock('img');
+        if (focused && focused.id === 'pw-vid') unlock('vid');
+      }
+    });
+  </script>
+
+</body>
+</html>

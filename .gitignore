@@ -1,0 +1,19 @@
+# System
+.DS_Store
+Thumbs.db
+
+# Source files not needed for deployment
+3.Portfolio/2.MakeRelated/
+3.Portfolio/4.GD/*.pdf
+3.Portfolio/4.GD/*.pptx
+3.Portfolio/3.Bionano/*.pdf
+3.Portfolio/3.Bionano/*.pptx
+3.Portfolio/3.Bionano/*_slide.jpg
+
+# Large source videos (only MP4s are used)
+3.Portfolio/1.Multimedia/*.mov
+
+# Zip archive
+portfolio-vercel.zip
+ziGOx4RV
+ziJMCWpI

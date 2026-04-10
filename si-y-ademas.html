@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sí, y Además — Paola Arzuffi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --dark:       #5c1020;
+      --medium:     #7b1831;
+      --light:      #f7c9d1;
+      --lightest:   #fde8ec;
+      --ink:        #1C1C1C;
+      --mid:        #5A5A5A;
+      --border:     #edd5da;
+      --white:      #FFFFFF;
+      --section-bg: #FDFAF9;
+      --accent:     #C1526A;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--white);
+      color: var(--ink);
+      line-height: 1.7;
+    }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--dark);
+      padding: 14px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .topbar a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--light);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+
+    .topbar a:hover { color: var(--white); }
+
+    .topbar .section-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      color: rgba(247,201,209,0.6);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ── HERO: blue, title only ── */
+    .hero {
+      background: #29B5E8;
+      padding: 64px 40px 56px;
+    }
+
+    .hero-inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .hero-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.5);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #0d0d0d;
+      line-height: 1.1;
+      margin-bottom: 14px;
+      letter-spacing: -0.5px;
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: rgba(0,0,0,0.65);
+      max-width: 600px;
+    }
+
+    /* ── POSTER at the end ── */
+    .poster-wrap {
+      background: #f2f2f2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 56px 40px;
+    }
+
+    .poster-wrap img {
+      width: 100%;
+      max-width: 440px;
+      display: block;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+      cursor: zoom-in;
+    }
+
+    /* ── SECTIONS ── */
+    .case-section {
+      padding: 56px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .case-section:last-of-type { border-bottom: none; }
+
+    .case-section.alt { background: var(--section-bg); }
+
+    .content-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--medium);
+      margin-bottom: 10px;
+      font-weight: 700;
+      display: block;
+    }
+
+    h2 {
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .body-text p {
+      font-size: 1rem;
+      color: var(--mid);
+      line-height: 1.8;
+      margin-bottom: 1em;
+    }
+
+    .body-text p:last-child { margin-bottom: 0; }
+
+    /* ── DESIGN DECISIONS ── */
+    .decision-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 24px;
+    }
+
+    .decision-list li {
+      padding: 16px 0;
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 24px;
+      align-items: baseline;
+    }
+
+    .decision-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+      padding-top: 2px;
+    }
+
+    .decision-text {
+      font-size: 0.95rem;
+      color: var(--mid);
+      line-height: 1.7;
+    }
+
+    /* ── TOOLS ── */
+    .tools-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .tool-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: var(--lightest);
+      color: var(--medium);
+      border-radius: 4px;
+      padding: 6px 12px;
+    }
+
+    /* ── LIGHTBOX ── */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #lightbox.open { display: flex; }
+
+    #lightbox-panel {
+      background: var(--white);
+      border-radius: 4px;
+      padding: 10px;
+      max-width: 80vw;
+      max-height: 92vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      cursor: zoom-out;
+    }
+
+    #lightbox-img {
+      max-width: 100%;
+      max-height: 88vh;
+      display: block;
+      border-radius: 2px;
+    }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      background: var(--dark);
+      padding: 40px;
+      text-align: center;
+    }
+
+    .page-footer a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--light);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .page-footer a:hover { color: var(--white); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 720px) {
+      .decision-list li { grid-template-columns: 1fr; gap: 6px; }
+      .hero h1 { font-size: 1.4rem; }
+      .topbar, .hero, .case-section { padding-left: 20px; padding-right: 20px; }
+      .hero-visual { padding: 40px 20px; }
+      .hero-visual img { max-width: 320px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── TOP BAR ── -->
+  <div class="topbar">
+    <a href="portfolio-mockup.html#graphic-design">← Home</a>
+    <span class="section-tag">Graphic Design</span>
+  </div>
+
+  <!-- ── HERO: blue title ── -->
+  <div class="hero">
+    <div class="hero-inner">
+      <span class="hero-label">ES Design</span>
+      <h1>Sí, y Además poster</h1>
+      <p class="hero-sub">A festival poster built through a structured creative process, from free association to final concept.</p>
+    </div>
+  </div>
+
+  <!-- ── CONCEPT ── -->
+  <section class="case-section">
+    <div class="content-wrap">
+      <span class="section-label">Concept</span>
+      <h2>The empty swing already says everything</h2>
+      <div class="body-text">
+        <p>The brief asked for a festival poster built around a strong concept and clear visual hierarchy. I chose improvisation theatre, a world I know from my own theatre background. The festival name came from the core principle of improv: "yes, and" — say yes to what is offered, and add to it.</p>
+        <p>The two concepts I wanted to convey were "you are not alone" and "losing your fear", chosen over more obvious options like "have fun" or "don't say no" because they connect to deeper emotional needs that actually motivate people to show up.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CREATIVE PROCESS ── -->
+  <section class="case-section alt">
+    <div class="content-wrap">
+      <span class="section-label">Creative Process</span>
+      <h2>Four ideation tools, one unexpected pivot</h2>
+      <div class="body-text">
+        <p>I worked through four ideation tools before arriving at the final image. Free association gave me the two core concepts. The Lotus Blossom method expanded them into visual associations, gears, trust falls, tightropes. Brand Sparks pushed me further: starting from unexpected objects, I arrived at the image of a tightrope walker with a parasol. Then TinEye Labs helped me define the colour palette, strong yellows and blues to capture the energy of throwing yourself into improv.</p>
+        <p>The pivot came during the moodboard phase on Pinterest. Searching for tightrope images, I landed on trapeze. The image of someone launching from a trapeze was immediately stronger, it captured both concepts at once: the fear of letting go, and the trust that someone will catch you.</p>
+        <p>But then I went further. I realised the trapeze itself, empty, no person, already said everything. The empty swing in mid-air implies the jump has already happened. Commitment without resolution. That is what improv feels like.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── DESIGN DECISIONS ── -->
+  <section class="case-section">
+    <div class="content-wrap">
+      <span class="section-label">Design Decisions</span>
+      <h2>One object, one question implied</h2>
+      <ul class="decision-list">
+        <li>
+          <span class="decision-label">Central image</span>
+          <span class="decision-text">A swing, cropped and off-balance, mid-motion, slightly outside the frame.</span>
+        </li>
+        <li>
+          <span class="decision-label">Concept</span>
+          <span class="decision-text">Restraint as visual metaphor. One object, one flat colour field, one question implied.</span>
+        </li>
+        <li>
+          <span class="decision-label">Colour</span>
+          <span class="decision-text">Flat cyan and yellow, high contrast, immediate, no gradients.</span>
+        </li>
+        <li>
+          <span class="decision-label">Typography</span>
+          <span class="decision-text">Heavy, confident, all caps at the base, anchors the movement above.</span>
+        </li>
+        <li>
+          <span class="decision-label">Hierarchy</span>
+          <span class="decision-text">Object first, information second. The poster communicates the feeling before it communicates the facts.</span>
+        </li>
+      </ul>
+      <div class="tools-row">
+        <span class="tool-tag">Adobe Illustrator</span>
+        <span class="tool-tag">Adobe InDesign</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── POSTER ── -->
+  <div class="poster-wrap">
+    <img src="3.Portfolio/4.GD/C01_A04_cartel.jpg" alt="Sí, y Además festival poster" id="poster-img" />
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <div class="page-footer">
+    <a href="portfolio-mockup.html#graphic-design">← Home</a>
+  </div>
+
+  <!-- ── LIGHTBOX ── -->
+  <div id="lightbox">
+    <div id="lightbox-panel">
+      <img id="lightbox-img" src="" alt="" />
+    </div>
+  </div>
+
+  <script>
+    document.querySelector('.poster-wrap img').addEventListener('click', function() {
+      document.getElementById('lightbox-img').src = this.src;
+      document.getElementById('lightbox-img').alt = this.alt;
+      document.getElementById('lightbox').classList.add('open');
+    });
+
+    document.getElementById('lightbox').addEventListener('click', function() {
+      this.classList.remove('open');
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') document.getElementById('lightbox').classList.remove('open');
+    });
+  </script>
+
+</body>
+</html>

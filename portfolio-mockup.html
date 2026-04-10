@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Paola Arzuffi — Portfolio Mockup</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --dark:     #5c1020;
+      --medium:   #7b1831;
+      --light:    #f7c9d1;
+      --lightest: #fde8ec;
+      --ink:      #1C1C1C;
+      --mid:      #5A5A5A;
+      --border:   #edd5da;
+      --white:    #FFFFFF;
+      --section-bg: #FDFAF9;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--white);
+      color: var(--ink);
+      line-height: 1.7;
+    }
+
+    /* ── Mockup banner ── */
+    .mockup-banner {
+      background: #FFF3E0;
+      border-bottom: 2px solid #FFB300;
+      padding: 11px 40px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.8rem;
+      color: #7A5200;
+      text-align: center;
+    }
+
+    /* ────────────────────────────────
+       HEADER
+    ──────────────────────────────── */
+    header { background: var(--dark); color: var(--white); }
+
+    .header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 64px 40px 52px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .header-text .eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--light);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .header-text h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.9rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      line-height: 1.08;
+      margin-bottom: 6px;
+      color: var(--white);
+    }
+
+    /* FIXED: high-contrast subtitle on dark bg */
+    .header-text .subtitle {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      color: var(--light);        /* light pink — clearly visible on dark */
+      margin-bottom: 36px;
+      letter-spacing: 0.02em;
+    }
+
+    .stat-row { display: flex; gap: 32px; flex-wrap: wrap; }
+
+    .stat { font-family: 'Space Grotesk', sans-serif; }
+
+    .stat .num {
+      display: block;
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.3px;
+      line-height: 1.1;
+    }
+
+    .stat .label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--light);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 2px;
+      display: block;
+    }
+
+    .headshot-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      flex-shrink: 0;
+    }
+
+    .headshot {
+      width: 148px;
+      height: 148px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(247,201,209,0.35);
+    }
+
+    .header-icons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    .header-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(247,201,209,0.12);
+      border: 1px solid rgba(247,201,209,0.25);
+      color: var(--light);
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .header-icons a:hover {
+      background: rgba(247,201,209,0.22);
+      border-color: rgba(247,201,209,0.5);
+    }
+
+    .header-icons svg {
+      width: 15px;
+      height: 15px;
+      fill: currentColor;
+    }
+
+    /* ── Nav ── */
+    nav {
+      background: var(--medium);
+      border-top: 1px solid rgba(247,201,209,0.15);
+    }
+
+    nav ul {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 40px;
+      list-style: none;
+      display: flex;
+    }
+
+    nav a {
+      display: block;
+      padding: 13px 24px 13px 0;
+      color: rgba(255,255,255,0.72);
+      text-decoration: none;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    nav li:last-child a { padding-right: 0; }
+
+    nav a:hover { color: var(--white); }
+
+    /* ────────────────────────────────
+       SECTIONS
+    ──────────────────────────────── */
+    section { padding: 68px 40px; }
+    section:nth-child(even) { background: var(--section-bg); }
+
+    .inner { max-width: 960px; margin: 0 auto; }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--medium);
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 36px;
+      line-height: 1.2;
+    }
+
+    h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--ink);
+    }
+
+    p { color: var(--mid); margin-bottom: 1em; }
+
+    /* ────────────────────────────────
+       ABOUT
+    ──────────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .about-text p { font-size: 1.02rem; line-height: 1.8; }
+
+    .skill-group { margin-bottom: 18px; }
+
+    .skill-cat {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--medium);
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+
+    .skill-group p { font-size: 0.87rem; line-height: 1.55; margin-bottom: 0; }
+
+    .section-intro {
+      font-size: 1rem;
+      color: var(--mid);
+      margin-top: -24px;
+      margin-bottom: 36px;
+    }
+
+    /* ────────────────────────────────
+       CASE STUDIES
+    ──────────────────────────────── */
+    .case-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .case-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 1fr;
+      gap: 24px;
+    }
+
+    .acc-learning { background: #4A1020; }
+    .acc-ai       { background: #8B2E3F; }
+    .acc-graphic  { background: #C1526A; }
+
+    .tag-graphic  { color: #C1526A; }
+    .res-graphic  { background: var(--lightest); color: #C1526A; }
+
+    .card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 14px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--medium);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: gap 0.2s, color 0.2s;
+    }
+
+    .card-cta:hover {
+      color: var(--dark);
+      gap: 10px;
+    }
+
+    .card-cta::after {
+      content: '→';
+      font-size: 0.9rem;
+    }
+
+    .card-soon {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 14px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: var(--mid);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.6;
+    }
+
+    .case-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .case-card:hover { box-shadow: 0 4px 20px rgba(92,16,32,0.09); }
+
+    .case-accent { height: 5px; }
+    .acc-1 { background: var(--dark); }
+    .acc-2 { background: var(--medium); }
+    .acc-3 { background: var(--light); }
+    .acc-4 { background: var(--lightest); }
+
+    .case-body {
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .case-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .tag-1 { color: var(--dark); }
+    .tag-2 { color: var(--medium); }
+    .tag-3 { color: var(--dark); }
+    .tag-4 { color: var(--medium); }
+
+    .case-card h3 { font-size: 1.05rem; margin-bottom: 10px; }
+
+    .case-card p { font-size: 0.88rem; line-height: 1.65; margin-bottom: 16px; }
+
+    .case-result {
+      border-radius: 4px;
+      padding: 9px 13px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      height: 64px;
+      overflow: hidden;
+    }
+
+    .res-1 { background: var(--lightest); color: var(--dark); }
+    .res-2 { background: var(--lightest); color: var(--medium); }
+    .res-3 { background: var(--lightest); color: var(--dark); }
+    .res-4 { background: var(--lightest); color: var(--medium); }
+
+    /* ────────────────────────────────
+       AI WORKFLOWS
+    ──────────────────────────────── */
+    .workflow-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .workflow-card {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 30px;
+      background: var(--white);
+    }
+
+    .workflow-icon { font-size: 1.5rem; margin-bottom: 14px; display: block; }
+
+    .workflow-card h3 { margin-bottom: 10px; }
+
+    .workflow-card p { font-size: 0.88rem; line-height: 1.65; margin-bottom: 16px; }
+
+    .before-after {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.83rem;
+    }
+
+    .ba-before { background: #EFEFEF; color: var(--mid); padding: 7px 12px; border-radius: 4px; font-weight: 600; }
+    .ba-arrow  { color: var(--medium); font-size: 1rem; }
+    .ba-after  { background: var(--lightest); color: var(--dark); padding: 7px 12px; border-radius: 4px; font-weight: 600; }
+
+    .tool-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+
+    .tool-pill {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.7rem;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: var(--lightest);
+      color: var(--dark);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    .video-box {
+      background: #111;
+      border-radius: 5px;
+      height: 170px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .video-box::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #1e1e1e, #0a0a0a);
+    }
+
+    .play-btn {
+      position: relative;
+      z-index: 1;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(92,16,32,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: white;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.45);
+    }
+
+    .video-label {
+      position: absolute;
+      bottom: 10px;
+      left: 12px;
+      z-index: 1;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ────────────────────────────────
+       TESTIMONIALS
+    ──────────────────────────────── */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .testimonial {
+      padding: 28px 32px;
+      border-left: 3px solid #EDD5DA;
+      background: #FDFAF9;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .stars {
+      color: #C1526A;
+      font-size: 0.75rem;
+      margin-bottom: 10px;
+      letter-spacing: 3px;
+    }
+
+    .testimonial blockquote {
+      font-size: 0.97rem;
+      line-height: 1.75;
+      color: #1C1C1C;
+      margin-bottom: 12px;
+      font-style: italic;
+    }
+
+    .testimonial cite {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: #8B2E3F;
+      font-style: normal;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    /* ────────────────────────────────
+       TIMELINE
+    ──────────────────────────────── */
+    .timeline {
+      position: relative;
+      padding-left: 28px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      bottom: 8px;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .timeline-item { position: relative; margin-bottom: 32px; }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -33px;
+      top: 8px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--medium);
+      border: 2px solid var(--white);
+      box-shadow: 0 0 0 1px var(--medium);
+    }
+
+    .timeline-date {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--medium);
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+
+    .timeline-item h3 { margin-bottom: 4px; font-size: 0.98rem; }
+    .timeline-item p { font-size: 0.86rem; margin-bottom: 0; }
+
+    /* ────────────────────────────────
+       FOOTER
+    ──────────────────────────────── */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.6);
+      padding: 48px 40px;
+      text-align: center;
+    }
+
+    footer .inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    footer .name {
+      font-size: 1.3rem;
+      color: white;
+      font-weight: normal;
+    }
+
+    footer .links { display: flex; gap: 28px; }
+
+    footer a {
+      color: var(--light);
+      text-decoration: none;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    footer a:hover { color: white; }
+
+    /* ── Responsive ── */
+    @media (max-width: 720px) {
+      .header-inner, .about-grid, .case-grid, .case-grid-3 { grid-template-columns: 1fr; }
+      h2 { font-size: 1.45rem; }
+      .headshot { width: 100px; height: 100px; }
+      .testimonial.featured { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="mockup-banner">
+    ✦ Look &amp; feel mockup — all text is placeholder copy, to be refined together. Layout and colours are what to evaluate.
+  </div>
+
+  <!-- ── HEADER ── -->
+  <header>
+    <div class="header-inner">
+      <div class="header-text">
+        <span class="eyebrow">Portfolio</span>
+        <h1>Paola Arzuffi</h1>
+        <p class="subtitle">Senior Instructional Designer &nbsp;·&nbsp; AI &amp; Visual Design &nbsp;·&nbsp; Madrid</p>
+        <div class="stat-row">
+          <div class="stat">
+            <span class="num">2 weeks → 2 days</span>
+            <span class="label">From source material<br>to finished storyboard</span>
+          </div>
+          <div class="stat">
+            <span class="num">2,500+</span>
+            <span class="label">Badges<br>AI Agents course</span>
+          </div>
+          <div class="stat">
+            <span class="num">90%+</span>
+            <span class="label">Learner satisfaction</span>
+          </div>
+        </div>
+      </div>
+      <div class="headshot-col">
+        <img
+          src="3.Portfolio/CelonisxCANDORStudio7FEB114.jpg"
+          alt="Paola Arzuffi"
+          class="headshot"
+          onerror="this.style.background='rgba(247,201,209,0.2)'"
+        />
+        <div class="header-icons">
+          <a href="https://linkedin.com/in/paola-arzuffi/" title="LinkedIn" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="mailto:paolarzuffi@gmail.com" title="Email">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#learning">Learning Design</a></li>
+        <li><a href="#ai-production">AI Production</a></li>
+        <li><a href="#graphic-design">Graphic Design</a></li>
+        <li><a href="#testimonials">Learner Voices</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ── ABOUT ── -->
+  <section id="about">
+    <div class="inner">
+      <p class="section-label">About</p>
+      <div class="about-grid">
+        <div class="about-text">
+          <h2>I make complex things clear.<br>And I use AI to do it faster.</h2>
+          <p>
+            I'm the person who spots when something is too complex, too unclear, or too hard to learn, and does something about it.
+          </p>
+          <p>
+            I have one of those backgrounds that doesn't fit neatly into a box: neuroscience researcher, bioinformatician, technical trainer, theatre director, instructional designer. The common thread is that I've always been the one who bridges the gap between technical complexity and the people who need to understand it.
+          </p>
+          <p>
+            What I do best is translate complexity into clarity. I break down hard concepts, keep learners genuinely engaged, use visuals to explain what words can't, and build it all into a system that's easy to follow — and faster to produce. At Make, I designed an AI Agents learning path that earned 90%+ satisfaction across thousands of learners, and built a Claude-powered workflow that cut storyboard production from two weeks to two days.
+          </p>
+          <p>
+            I connect dots across very different fields and bring that perspective to every learning problem I work on. Based in Madrid. Fluent in English, Spanish, Italian, and French.
+          </p>
+        </div>
+        <div>
+          <div class="skill-group">
+            <p class="skill-cat">Instructional Design</p>
+            <p>Curriculum design · Needs analysis · ADDIE · Blended learning · Assessment design · LMS management</p>
+          </div>
+          <div class="skill-group">
+            <p class="skill-cat">AI &amp; Automation</p>
+            <p>Claude · Make · AI-powered content workflows · Prompt engineering</p>
+          </div>
+          <div class="skill-group">
+            <p class="skill-cat">Coding</p>
+            <p>HTML · CSS · JavaScript · Python</p>
+          </div>
+          <div class="skill-group">
+            <p class="skill-cat">Visual &amp; Graphic Design</p>
+            <p>Visual thinking · Design thinking · Brand identity · UI/UX</p>
+          </div>
+          <div class="skill-group">
+            <p class="skill-cat">Tools</p>
+            <p>Articulate Storyline &amp; Rise · Adobe Captivate · Adobe Creative Suite · Adobe After Effects · Camtasia · Vyond · Figma · Miro</p>
+          </div>
+          <div class="skill-group">
+            <p class="skill-cat">Languages</p>
+            <p>English · Spanish · Italian · French</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── LEARNING DESIGN ── -->
+  <section id="learning">
+    <div class="inner">
+      <p class="section-label">Learning Design</p>
+      <h2>Courses, programs and learning experiences I've built</h2>
+      <div class="case-grid-3">
+
+        <div class="case-card">
+          <div class="case-accent acc-learning"></div>
+          <div class="case-body">
+            <p class="case-tag tag-1">Make Academy</p>
+            <h3>AI Agents Learning Paths</h3>
+            <p>Designed two learning paths from beginner to advanced for a global no-code automation audience. Owned the full process from learning path design to storyboard, supporting the final delivery.</p>
+            <div class="case-result res-1">2,500+ badges earned &nbsp;·&nbsp; 90%+ learner satisfaction</div>
+            <a href="ai-agents.html" class="card-cta">Learn more</a>
+          </div>
+        </div>
+
+        <div class="case-card">
+          <div class="case-accent acc-learning"></div>
+          <div class="case-body">
+            <p class="case-tag tag-1">Make</p>
+            <h3>In-App Training Guides</h3>
+            <p>Led the content development of Make's in-app practical guides with cross-functional teams, embedding hands-on learning directly inside the platform so learners could practice in context without switching tools.</p>
+            <div class="case-result res-1">Learners practice directly inside Make</div>
+            <a href="in-app-guides.html" class="card-cta">Learn more</a>
+          </div>
+        </div>
+
+        <div class="case-card">
+          <div class="case-accent acc-learning"></div>
+          <div class="case-body">
+            <p class="case-tag tag-1">Make Academy</p>
+            <h3>Hand-Drawn Rise Course</h3>
+            <p>Designed and illustrated a Rise course using hand-drawn visuals, giving the course a distinctive and personal visual identity.</p>
+            <div class="case-result res-1">Fun and engaging course</div>
+            <a href="hand-drawn-rise.html" class="card-cta">Learn more</a>
+          </div>
+        </div>
+
+        <div class="case-card">
+          <div class="case-accent acc-learning"></div>
+          <div class="case-body">
+            <p class="case-tag tag-1">Bionano</p>
+            <h3>Building a Training Function from Scratch</h3>
+            <p>Identified three simultaneous training gaps at a genomics company with no existing training infrastructure, and built the function to address all of them: customer onboarding, internal science training, and pre-installation support materials.</p>
+            <div class="case-result res-1">Reduced ramp-up time &nbsp;·&nbsp; Fewer support tickets</div>
+            <a href="onboarding-bionano.html" class="card-cta">Learn more</a>
+          </div>
+        </div>
+
+        <div class="case-card">
+          <div class="case-accent acc-learning"></div>
+          <div class="case-body">
+            <p class="case-tag tag-1">QIAGEN</p>
+            <h3>NGS Onboarding Program Redesign</h3>
+            <p>Redesigned Field Application Specialist onboarding from a two-week face-to-face block into a blended program. Cut live time by 58% while improving relevance and team autonomy.</p>
+            <div class="case-result res-1">58% less live training time</div>
+            <a href="onboarding-qiagen.html" class="card-cta">Learn more</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── AI PRODUCTION ── -->
+  <section id="ai-production">
+    <div class="inner">
+      <p class="section-label">AI Production</p>
+      <h2>The systems I built to build learning material faster</h2>
+      <div class="case-grid-3">
+
+        <div class="case-card">
+          <div class="case-accent acc-ai"></div>
+          <div class="case-body">
+            <p class="case-tag tag-2">Claude Code</p>
+            <h3>Course Production Pipeline</h3>
+            <p>Built a Claude-powered workflow that takes a course learning objective and SME material through research, outlining and final storyboarding, replacing a slow manual process with a structured AI-assisted one that keeps human review at every stage.</p>
+            <div class="case-result res-2">Storyboard production: 2 weeks → 2 days</div>
+            <span class="card-soon">Coming soon</span>
+          </div>
+        </div>
+
+        <div class="case-card">
+          <div class="case-accent acc-ai"></div>
+          <div class="case-body">
+            <p class="case-tag tag-2">Claude Code</p>
+            <h3>Video Production Pipeline</h3>
+            <p>Designed and implemented Make Academy's first AI-driven video production system, integrating Claude to produce complete narrated training videos from learning objective and source information to final cut.</p>
+            <div class="case-result res-2">Script to finished video in half a day</div>
+            <span class="card-soon">Coming soon</span>
+          </div>
+        </div>
+
+        <div class="case-card">
+          <div class="case-accent acc-ai"></div>
+          <div class="case-body">
+            <p class="case-tag tag-2">Claude Code</p>
+            <h3>Orchestrator</h3>
+            <p>Built an AI orchestration system using Claude Code that manages dedicated agents, one for course content, one for video, coordinating all stages of content production automatically. The system knows what to do and when: the only human role is supervision.</p>
+            <div class="case-result res-2">End-to-end content production with a single prompt</div>
+            <span class="card-soon">Coming soon</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── GRAPHIC DESIGN ── -->
+  <section id="graphic-design">
+    <div class="inner">
+      <p class="section-label">Graphic Design</p>
+      <h2>Visual projects I've conceived and designed</h2>
+      <div class="case-grid-3">
+
+        <div class="case-card">
+          <div class="case-accent acc-graphic"></div>
+          <div class="case-body">
+            <p class="case-tag tag-graphic">ES Design</p>
+            <h3>SAV1 · A Manchester Fanzine</h3>
+            <p>A 14-page editorial fanzine about Peter Saville, Factory Records and the visual identity of a city. Researched, written and designed from scratch: typography, layout and image composition all informed by the post-punk aesthetic it documents.</p>
+            <div class="case-result res-graphic">Concept to print &nbsp;·&nbsp; 14 pages</div>
+            <a href="sav1.html" class="card-cta">Learn more</a>
+          </div>
+        </div>
+
+        <div class="case-card">
+          <div class="case-accent acc-graphic"></div>
+          <div class="case-body">
+            <p class="case-tag tag-graphic">ES Design</p>
+            <h3>SWiRED · Brand Identity</h3>
+            <p>Full brand identity for a fictional chocolate brand designed for neurodivergent people. Developed the concept, name, symbol, typography, colour system and brand applications from the ground up.</p>
+            <div class="case-result res-graphic">Complete identity system &nbsp;·&nbsp; Naming to applications</div>
+            <a href="swired.html" class="card-cta">Learn more</a>
+          </div>
+        </div>
+
+        <div class="case-card">
+          <div class="case-accent acc-graphic"></div>
+          <div class="case-body">
+            <p class="case-tag tag-graphic">ES Design</p>
+            <h3>Lady Dada</h3>
+            <p>Editorial article exploring the women of the Dada movement, researched, written and designed from scratch, combining archival photography, typographic composition and layout to bring the subject to life.</p>
+            <div class="case-result res-graphic">Finished editorial piece</div>
+            <a href="lady-dada.html" class="card-cta">Learn more</a>
+          </div>
+        </div>
+
+        <div class="case-card">
+          <div class="case-accent acc-graphic"></div>
+          <div class="case-body">
+            <p class="case-tag tag-graphic">ES Design</p>
+            <h3>Sí, y Además poster</h3>
+            <p>Poster designed for a fictional international improvisation theatre festival in Madrid. Bold, minimal, one strong visual idea, a swing on a flat colour field with clean typographic hierarchy.</p>
+            <div class="case-result res-graphic">Finished poster</div>
+            <a href="si-y-ademas.html" class="card-cta">Learn more</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TESTIMONIALS ── -->
+  <section id="testimonials">
+    <div class="inner">
+      <p class="section-label">Learner Voices</p>
+      <h2>How the courses changed the way people work</h2>
+      <div class="testimonials-grid">
+
+        <div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <blockquote>"The Academy probably saved me 6+ months of figuring things out alone. And now the automations I'm building and teaching can save my students 5–15 hours per week each."</blockquote>
+          <cite>S.T. — Automation course creator &amp; UX designer</cite>
+        </div>
+
+        <!-- R.C. -->
+        <div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <blockquote>"Before the Academy I struggled with structuring complex workflows. After going through it, things became much clearer, I started thinking in terms of systems instead of just steps."</blockquote>
+          <cite>R.C. — Make Academy learner</cite>
+        </div>
+
+        <!-- E.R. -->
+        <div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <blockquote>"After going through the Academy courses, I became much more familiar with the platform. It helped me understand the overall flow of building automations, not just individual tools or shortcuts."</blockquote>
+          <cite>E.R. — Make Academy learner</cite>
+        </div>
+
+        <!-- K.F. -->
+        <div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <blockquote>"What I'm most grateful for, beyond the skills themselves, is that Make has built such a structured, thorough learning system around a discipline that can look intimidating at first. That investment in learners makes a real difference."</blockquote>
+          <cite>K.F. — Make Academy learner</cite>
+        </div>
+
+        <!-- M.R. -->
+        <div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <blockquote>"I've actually pivoted my focus from pursuing a Master's degree to becoming a Certified Automation Specialist. That kind of deliberate commitment doesn't come from a good interface, it comes from courses that are genuinely worth completing."</blockquote>
+          <cite>M.R. — Senior Production Supervisor</cite>
+        </div>
+
+        <div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <blockquote>"The workflows I've made are helping professional companies reply to many general inquiries sent every day through an informal support channel."</blockquote>
+          <cite>M.B. — IT Manager</cite>
+        </div>
+
+        <div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <blockquote>"I really liked the way you presented the training. Great content, organisation, encouraging interaction with the audience, all great elements of an effective training session."</blockquote>
+          <cite>T.S. — Associate Director, Product Management · Bionano</cite>
+        </div>
+
+        <div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <blockquote>"Your teaching style is quite unique and I loved your way of engaging the audience. What really intrigued me is your slide layout, the simplicity and how powerful the slides are to convey relevant information."</blockquote>
+          <cite>M.P. — Field Application Specialist · Bionano</cite>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── EXPERIENCE ── -->
+  <section id="experience">
+    <div class="inner">
+      <p class="section-label">Experience</p>
+      <h2>Where I've worked and what I've achieved</h2>
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <p class="timeline-date">Jan 2024 – Apr 2026</p>
+          <h3>Senior Technical Training Specialist, Make</h3>
+          <p>Designed technical training for a global no-code automation audience, owning the full process from learning path design to storyboard and supporting final delivery. Built an AI-powered content workflow cutting storyboard production from 2 weeks to 2 days. Launched the first AI Agents learning path and implemented the first AI-driven video production pipeline integrating Claude, Remotion and ElevenLabs.</p>
+        </div>
+
+        <div class="timeline-item">
+          <p class="timeline-date">Dec 2021 – Dec 2023</p>
+          <h3>Senior Technical Training Specialist, Bionano</h3>
+          <p>Combined technical customer support with training design to improve user success with Optical Genome Mapping technology. Completely rebuilt technical onboarding from scratch, live sessions, async content, assessments and job aids. Built performance support tools that reduced support ticket volume.</p>
+        </div>
+
+        <div class="timeline-item">
+          <p class="timeline-date">Sep 2020 – Jul 2021</p>
+          <h3>Bioinformatics Manager, Progenika (Grifols)</h3>
+          <p>Led bioinformatics work on an FDA-submitted diagnostic test. Designed and delivered training on FDA requirements for non-technical stakeholders, reducing cross-team blockers and improving collaboration across the project.</p>
+        </div>
+
+        <div class="timeline-item">
+          <p class="timeline-date">Apr 2019 – Aug 2020</p>
+          <h3>Global Product Support Specialist, QIAGEN</h3>
+          <p>Redesigned the global support team onboarding after a gap analysis, built a blended learning program including async modules, video training, interactive exercises and a facilitator guide. Reduced onboarding time by 40%.</p>
+        </div>
+
+        <div class="timeline-item">
+          <p class="timeline-date">Jul 2015 – Mar 2019</p>
+          <h3>Senior Scientist, QIAGEN</h3>
+          <p>Led bioinformatics and product development projects for major pharma partners. Designed a bioinformatics training course for the R&amp;D team, improving efficiency and enabling the team to work more independently.</p>
+        </div>
+
+        <div class="timeline-item">
+          <p class="timeline-date">Mar 2012 – Jun 2015</p>
+          <h3>Junior Analytical Scientist, Aptalis</h3>
+          <p>Set up a new protein analysis lab and designed and delivered in-person training on key biological topics. Resolved a major communication breakdown with an external partner by identifying knowledge gaps and creating a targeted training plan. Co-developed a novel enzyme purification method awarded US Patent US2014063984.</p>
+        </div>
+
+        <div class="timeline-item">
+          <p class="timeline-date">Jul 2011 – Feb 2012</p>
+          <h3>Medical Affairs Assistant, Scharper</h3>
+          <p>Designed and delivered face-to-face training for 300+ sales representatives to support a major lung product launch. Collaborated with Key Opinion Leaders and external CROs on product development and launch strategy.</p>
+        </div>
+
+        <div class="timeline-item">
+          <p class="timeline-date">Nov 2007 – Jun 2011</p>
+          <h3>Researcher, IRCCS Istituto Neurologico C. Besta</h3>
+          <p>Led a neurological research team combining genetic research with training and mentoring. Designed and delivered onboarding for all new team members. Communicated research findings through scientific papers and presentations at international conferences.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer id="contact">
+    <div class="inner">
+      <p class="name">Paola Arzuffi</p>
+      <p style="font-size:0.85rem; color: var(--light);">paolarzuffi@gmail.com &nbsp;·&nbsp; Madrid, Spain</p>
+      <div class="links">
+        <a href="https://linkedin.com/in/paola-arzuffi/">LinkedIn</a>
+        <a href="mailto:paolarzuffi@gmail.com">Get in touch</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
